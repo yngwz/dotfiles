@@ -1,2 +1,0 @@
-Plug 'liuchengxu/vim-clap'
-

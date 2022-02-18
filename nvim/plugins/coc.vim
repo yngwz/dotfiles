@@ -20,6 +20,7 @@ let g:coc_global_extensions = [
     \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
     \ 'coc-tsserver',
     \ '@yaegassy/coc-volar',
+    \ 'coc-prisma',
 \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
