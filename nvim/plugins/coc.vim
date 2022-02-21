@@ -10,18 +10,17 @@ let g:coc_global_extensions = [
     \ 'coc-git',
     \ 'coc-html',
     \ 'coc-json',
-    \ 'coc-pairs',
     \ 'coc-phpls',
     \ 'coc-php-cs-fixer',
     \ 'coc-sh',
     \ 'coc-snippets',
     \ 'coc-sql',
     \ 'coc-svg',
-    \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
     \ 'coc-tsserver',
     \ '@yaegassy/coc-volar',
     \ 'coc-prisma',
-\ ]
+    \ ]
+ 
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by

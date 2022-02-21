@@ -24,6 +24,5 @@
     "git.removedSign.text": "▁",
     "git.topRemovedSign.text": "▔",
     "git.changeRemovedSign.text": "▔",
-    "tailwindCSS.validate": true,
-    "tailwindCSS.emmetCompletions": true
+    "tailwindCSS.trace.server": "verbose"
 }
