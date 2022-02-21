@@ -68,6 +68,9 @@ source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/prisma.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/commentary.vim
+" source ~/.config/nvim/plugins/javascript.vim
+" source ~/.config/nvim/plugins/typescript.vim
+source ~/.config/nvim/plugins/surround.vim
 
 call plug#end()
 
