@@ -45,6 +45,8 @@ return require('packer').startup(function(use)
   use "nvim-lua/popup.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
+  use "kyazdani42/nvim-web-devicons"
+  use "akinsho/bufferline.nvim"
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -79,6 +81,12 @@ return require('packer').startup(function(use)
 -- Comments
  use "numToStr/Comment.nvim"
  use "JoosepAlviste/nvim-ts-context-commentstring"
+
+-- git
+ use "lewis6991/gitsigns.nvim"
+
+ --nvim tree
+ use "kyazdani42/nvim-tree.lua"
 
 end)
 
