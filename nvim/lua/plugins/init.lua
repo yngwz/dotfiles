@@ -47,6 +47,7 @@ return require('packer').startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
   use "kyazdani42/nvim-web-devicons"
   use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
 
   use {
     'nvim-treesitter/nvim-treesitter',
