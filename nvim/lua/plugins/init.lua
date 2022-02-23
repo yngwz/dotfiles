@@ -39,17 +39,18 @@ packer.init {
 }
 
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-                
+  use "nvim-lua/plenary.nvim"
+  use "nvim-lua/popup.nvim"
+  use "lewis6991/impatient.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
+
   use {
     'nvim-treesitter/nvim-treesitter',
      run = ':TSUpdate'
   }
-  use {
-  'nvim-telescope/telescope.nvim',
-  requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  use { 'nvim-telescope/telescope.nvim' }
 
  use({"catppuccin/nvim",as = "catppuccin"})
 
@@ -59,11 +60,25 @@ return require('packer').startup(function()
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"       
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
-end) 
+  -- Language server (LSP)
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+
+  --auto-pairs
+  use "windwp/nvim-autopairs"
+
+-- Comments
+ use "numToStr/Comment.nvim"
+ use "JoosepAlviste/nvim-ts-context-commentstring"
+
+end)
 

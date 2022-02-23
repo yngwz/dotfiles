@@ -54,12 +54,22 @@ map("n" , "<leader>sg", ":%s/<C-r><C-w>//g<Left><Left>", { noremap = true })
 map("n" , "<leader>pi", ":PackerInstall<cr>", { noremap = true })
 map("n" , "<leader>ps", ":PackerSync<cr>", { noremap = true })
 
+-- Telescope shortcuts
+map("n","<leader>f", ":Telescope find_files<cr>",{ noremap = true})
+map("n","<leader>fg", ":Telescope live_grep<cr>",{ noremap = true})
+map("n","<leader>fb", ":Telescope buffers<cr>",{ noremap = true})
+map("n","<leader>fh", ":Telescope help_tags<cr>",{ noremap = true})
+
 ------------------------------------------------------------------------------
 -- Plugins
 ------------------------------------------------------------------------------
 require "plugins.configs.treesitter"
 require "plugins.configs.catppuccin"
 require "plugins.configs.cmp"
+require "plugins.configs.lsp"
+require "plugins.configs.telescope"
+require "plugins.configs.autopairs"
+require "plugins.configs.comment"
 
 ------------------------------------------------------------------------------
 -- Theme
