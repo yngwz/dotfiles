@@ -94,6 +94,8 @@ require "plugins.configs.indentline"
 require "plugins.configs.gitsigns"
 require "plugins.configs.nvim-tree"
 require "plugins.configs.bufferline"
+require "plugins.configs.toggleterm"
+require "plugins.configs.lualine"
 
 ------------------------------------------------------------------------------
 -- Theme

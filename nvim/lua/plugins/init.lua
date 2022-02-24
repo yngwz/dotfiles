@@ -42,20 +42,22 @@ packer.init {
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use "nvim-lua/plenary.nvim"
+  use "windwp/nvim-autopairs"
+   use "windwp/nvim-ts-autotag"
+   use "folke/which-key.nvim"
+   use "numToStr/Comment.nvim"
   use "nvim-lua/popup.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "kyazdani42/nvim-web-devicons"
+ use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
+ use "akinsho/toggleterm.nvim"
+ use "nvim-lualine/lualine.nvim"
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-     run = ':TSUpdate'
-  }
-  use { 'nvim-telescope/telescope.nvim' }
-
- use({"catppuccin/nvim",as = "catppuccin"})
+ -- Colerchemes
+  use({"catppuccin/nvim",as = "catppuccin"})
 
    -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -76,18 +78,21 @@ return require('packer').startup(function(use)
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
-  --auto-pairs
-  use "windwp/nvim-autopairs"
+
+  -- Telescope
+  use { 'nvim-telescope/telescope.nvim' }
+
+  -- Treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+     run = ':TSUpdate'
+  }
 
 -- Comments
- use "numToStr/Comment.nvim"
  use "JoosepAlviste/nvim-ts-context-commentstring"
 
 -- git
  use "lewis6991/gitsigns.nvim"
-
- --nvim tree
- use "kyazdani42/nvim-tree.lua"
 
 end)
 
