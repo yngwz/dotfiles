@@ -44,6 +44,19 @@ M.setup = function()
   })
 end
 
+-- LSP servers that will have formatting handled by null-ls
+local formatter_ignore_list = {"tsserver", "html"}
+
+local function has_value(tab,val)
+  for index, value in ipairs(tab) do
+   if value == val then
+     return true
+   end
+  end
+  return false
+end
+
+
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -84,8 +97,10 @@ local function lsp_keymaps(bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
+
+
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
+  if has_value(formatter_ignore_list,client.name) then
     client.resolved_capabilities.document_formatting = false
   end
   lsp_keymaps(bufnr)
