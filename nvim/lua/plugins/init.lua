@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("MunifTanjim/nui.nvim")
-	use("windwp/nvim-autopairs")
+	use({ "windwp/nvim-autopairs", after = { "nvim-cmp" } })
 	use("windwp/nvim-ts-autotag")
 	use("folke/which-key.nvim")
 	use("numToStr/Comment.nvim")
@@ -62,18 +62,19 @@ return require("packer").startup(function(use)
 	-- Colerchemes
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
+	use({ "rafamadriz/friendly-snippets", event = "InsertEnter" }) -- a bunch of snippets to use
+
 	-- cmp plugins
-	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
+	use({ "hrsh7th/nvim-cmp", after = "friendly-snippets" }) -- The completion plugin
+	use({ "hrsh7th/cmp-nvim-lua", after = "LuaSnip" }) -- path completions
+	use({ "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" }) -- buffer completions
+	use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
+	use({ "hrsh7th/cmp-cmdline", after = "cmp-nvim-lua" }) -- cmdline completions
+	use({ "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" })
 
 	-- snippets
-	use("L3MON4D3/LuaSnip") --snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+	use({ "L3MON4D3/LuaSnip", wants = "friendly-snippets", after = "nvim-cmp" }) --snippet engine
+	use({ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }) -- snippet completions
 
 	-- Language server (LSP)
 	use("neovim/nvim-lspconfig") -- enable LSP
