@@ -91,6 +91,8 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
+	use({ "jose-elias-alvarez/nvim-lsp-ts-utils", after = { "nvim-treesitter" } })
+
 	-- Comments
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
