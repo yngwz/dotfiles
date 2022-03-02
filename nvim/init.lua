@@ -11,7 +11,7 @@ local g = vim.g -- global for let options
 -- local api = vim.api
 
 ------------------------------------------------------------------------------
--- General Settings
+-- General Settings something
 ------------------------------------------------------------------------------
 opt.hidden = true
 opt.termguicolors = true
@@ -27,7 +27,7 @@ opt.pumheight = 10
 opt.relativenumber = true
 opt.hlsearch = false
 opt.errorbells = false
-opt.undodir = "~/.vim/undodir"
+opt.undodir = vim.fn.stdpath("config") .. "/.undo"
 opt.undofile = true
 opt.scrolloff = 10
 opt.sidescrolloff = 8
