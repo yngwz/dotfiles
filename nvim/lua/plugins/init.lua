@@ -62,14 +62,14 @@ return require("packer").startup(function(use)
 	-- Colerchemes
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
-	use({ "rafamadriz/friendly-snippets", event = "InsertEnter" }) -- a bunch of snippets to use
+	use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
 
 	-- cmp plugins
 	use({ "hrsh7th/nvim-cmp", after = "friendly-snippets" }) -- The completion plugin
 	use({ "hrsh7th/cmp-nvim-lua", after = "LuaSnip" }) -- path completions
 	use({ "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" }) -- buffer completions
 	use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
-	use({ "hrsh7th/cmp-cmdline", after = "cmp-nvim-lua" }) -- cmdline completions
+	use({ "hrsh7th/cmp-cmdline", after = "cmp-path" }) -- cmdline completions
 	use({ "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" })
 
 	-- snippets
