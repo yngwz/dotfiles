@@ -1,108 +1,32 @@
-local utils = require("utils")
-require("plugins")
+local present, impatient = pcall(require, "impatient")
 
--- aliases
-local opt = vim.opt -- global
-local g = vim.g -- global for let options
--- local wo = vim.wo    -- window local
--- local bo = vim.bo    -- buffer local
--- local fn = vim.fn    -- access vim functions
--- local cmd = vim.cmd  -- vim commands
--- local api = vim.api
+if present then
+   impatient.enable_profile()
+end
 
-------------------------------------------------------------------------------
--- General Settings something
-------------------------------------------------------------------------------
-opt.hidden = true
-opt.termguicolors = true
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.smartindent = true
-opt.smartcase = true
-opt.exrc = true
-opt.nu = true
-opt.pumheight = 10
-opt.relativenumber = true
-opt.hlsearch = false
-opt.errorbells = false
-opt.undodir = vim.fn.stdpath("config") .. "/.undo"
-opt.undofile = true
-opt.scrolloff = 10
-opt.sidescrolloff = 8
-opt.incsearch = true
-opt.cmdheight = 1
-opt.updatetime = 50
-opt.signcolumn = "yes"
-opt.clipboard = "unnamedplus"
-opt.ignorecase = true
-opt.completeopt = "menuone,noselect"
-opt.timeoutlen = 500
-opt.updatetime = 100
-opt.splitbelow = true
-opt.splitright = true
-opt.swapfile = false
 
-------------------------------------------------------------------------------
--- Keymaps
-------------------------------------------------------------------------------
-local map = utils.map
+local core_modules = {
+   "core.options",
+   "core.autocmds",
+   "core.mappings",
+}
 
---Remap space as leader key
-map("", "<Space>", "<Nop>", { noremap = true, silent = true })
-g.mapleader = " "
-g.maplocalleader = " "
+for _, module in ipairs(core_modules) do
+   local ok, err = pcall(require, module)
+   if not ok then
+      error("Error loading " .. module .. "\n\n" .. err)
+   end
+end
 
-map("n", "<leader>vr", ":source $MYVIMRC<cr>", { noremap = true }) -- Source init.lua
-map("n", "<leader>ve", ":edit ~/.config/nvim/init.lua<cr> ", { noremap = true }) -- Edit init.lua
+-- non plugin mappings
+require("core.mappings").misc()
 
--- Window navigation
-map("n", "<C-h>", "<C-w>h", { noremap = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true })
-map("n", "<C-k>", "<C-w>k", { noremap = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true })
-
-map("i", "jk", "<ESC>", { noremap = true })
-
--- Buffer navigation
-map("n", "<S-l>", ":bnext<cr>", { noremap = true })
-map("n", "<S-h>", ":bprevious<cr>", { noremap = true })
-
--- Substitution and Search
-map("n", "<leader>sg", ":%s/<C-r><C-w>//g<Left><Left>", { noremap = true })
-
--- Packer shortcuts
-map("n", "<leader>pi", ":PackerInstall<cr>", { noremap = true })
-map("n", "<leader>ps", ":PackerSync<cr>", { noremap = true })
-
--- Telescope shortcuts
-map("n", "<leader>f", ":Telescope find_files<cr>", { noremap = true })
-map("n", "<leader>fg", ":Telescope live_grep<cr>", { noremap = true })
-map("n", "<leader>fb", ":Telescope buffers<cr>", { noremap = true })
-map("n", "<leader>fh", ":Telescope help_tags<cr>", { noremap = true })
-
-------------------------------------------------------------------------------
--- Plugins
-------------------------------------------------------------------------------
-require("plugins.configs.impatient")
-require("plugins.configs.catppuccin")
-require("plugins.configs.cmp")
-require("plugins.configs.lsp")
-require("plugins.configs.telescope")
-require("plugins.configs.treesitter")
-require("plugins.configs.autopairs")
-require("plugins.configs.comment")
-require("plugins.configs.indentline")
-require("plugins.configs.gitsigns")
-require("plugins.configs.bufferline")
-require("plugins.configs.toggleterm")
-require("plugins.configs.feline")
-require("plugins.configs.whichkey")
-require("plugins.configs.colorizer")
-require("plugins.configs.neotree")
-
-------------------------------------------------------------------------------
--- Theme
-------------------------------------------------------------------------------
-vim.cmd([[colorscheme catppuccin]])
+-- check if custom init.lua file exists
+if vim.fn.filereadable(vim.fn.stdpath "config" .. "/lua/custom/init.lua") == 1 then
+   -- try to call custom init, if not successful, show error
+   local ok, err = pcall(require, "custom")
+   if not ok then
+      vim.notify("Error loading custom/init.lua\n\n" .. err)
+   end
+   return
+end
