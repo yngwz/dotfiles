@@ -3,7 +3,7 @@
 # ===========================================================================================================
 
 # Load the Antigen plugin manager
-source antigen.zsh
+source $HOME/antigen.zsh
 
 antigen use oh-my-zsh
 

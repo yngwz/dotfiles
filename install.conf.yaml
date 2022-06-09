@@ -7,7 +7,7 @@
     ~/.zshrc: zshrc
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
-    ~/.tmux: tmux
+    ~/.config/tmux: tmux
     ~/antigen.zsh: antigen.zsh
 
 - shell:
