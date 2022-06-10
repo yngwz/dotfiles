@@ -64,5 +64,6 @@ export PATH="/usr/local/opt/valet-php@7.3/sbin:$PATH"
 # Vim -> NeoVim
 alias vim="nvim"
 alias vi="nvim"
+alias misspell="~/bin/misspell"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

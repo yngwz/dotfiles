@@ -94,6 +94,11 @@ lspconfig.sumneko_lua.setup({
 --     on_attach = on_attach,
 --     filetypes = require("plugins.lsp.servers.emmet").filetypes,
 -- })
+--
+lspconfig.prismals.setup({
+    on_attach = on_attach,
+    capabilities = require("plugins.lsp.servers.prisma").settings,
+})
 
 for _, server in ipairs({ "bashls", "cssls", "html", "prismals" }) do
     lspconfig[server].setup({

@@ -1,6 +1,8 @@
-local present,null_ls = pcall(require,"null-ls")
+local present, null_ls = pcall(require, "null-ls")
 
-
+if not present then
+    return
+end
 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
@@ -14,6 +16,9 @@ local sources = {
     -- Lua
     formatting.stylua,
     diagnostics.luacheck.with({ extra_args = { "--global vim" } }),
+
+    -- Markdown
+    null_ls.builtins.diagnostics.markdownlint,
 }
 
 -- add to a specific server's on_attach,
@@ -29,10 +34,7 @@ local on_attach = function(client)
     end
 end
 
-
 null_ls.setup({
-        sources = sources,
-        on_attach = on_attach,
+    sources = sources,
+    on_attach = on_attach,
 })
-
-
