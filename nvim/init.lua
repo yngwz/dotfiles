@@ -5,12 +5,12 @@ if present then
 end
 
 local core_modules = {
-    "plugins",
-    "options",
-    "utils",
-    "autocmds",
-    "mappings",
-    "cmds",
+    "yngwz.plugins",
+    "yngwz.options",
+    "yngwz.utils",
+    "yngwz.autocmds",
+    "yngwz.mappings",
+    "yngwz.cmds",
 }
 
 for _, module in ipairs(core_modules) do
