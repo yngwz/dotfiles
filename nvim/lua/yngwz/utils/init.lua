@@ -1,4 +1,10 @@
+local reload = require("yngwz.utils.reload")
 _G.utils = {}
+
+_G.reload = function()
+    reload.all()
+    vim.notify("Nvim config reloaded", vim.log.levels.INFO)
+end
 
 utils.map = function(mode, keys, command, opt)
     local options = { silent = true }

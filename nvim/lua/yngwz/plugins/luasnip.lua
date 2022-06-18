@@ -12,8 +12,8 @@ luasnip.config.set_config({
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- load snippets
-require("snippets.react")
-require("snippets.lua")
+require("yngwz.snippets.react")
+require("yngwz.snippets.lua")
 
 -------------------------------------------------------------------------------
 -- Keymaps
@@ -43,5 +43,5 @@ end, { silent = true })
 vim.keymap.set(
     "n",
     "<leader><leader>s",
-    "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>"
+    "<cmd>source ~/.config/nvim/lua/yngwz/plugins/luasnip.lua<CR>"
 )
