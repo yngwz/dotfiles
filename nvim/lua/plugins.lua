@@ -196,6 +196,10 @@ local plugins = {
         "hrsh7th/cmp-path",
         after = "cmp-buffer",
     },
+    {
+        "ray-x/cmp-treesitter",
+        after = "cmp-path",
+    },
     { "hrsh7th/cmp-cmdline", after = "cmp-path" },
     { "hrsh7th/cmp-calc", after = "cmp-cmdline" },
     {

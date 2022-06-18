@@ -97,7 +97,9 @@ lspconfig.sumneko_lua.setup({
 --
 lspconfig.prismals.setup({
     on_attach = on_attach,
-    capabilities = require("plugins.lsp.servers.prisma").settings,
+    filetypes = require("plugins.lsp.servers.prisma").filetypes,
+    capabilities = require("plugins.lsp.servers.prisma").capabilities,
+    settings = require("plugins.lsp.servers.prisma").settings,
 })
 
 for _, server in ipairs({ "bashls", "cssls", "html", "prismals" }) do

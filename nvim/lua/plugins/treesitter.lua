@@ -28,7 +28,7 @@ treesitter.setup({
     },
 
     indent = {
-        enable = false,
+        enable = true,
     },
 
     rainbow = {

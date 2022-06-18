@@ -12,6 +12,7 @@ local sources = {
     -- webdev
     formatting.prettierd,
     formatting.rustywind,
+    formatting.prismaFmt.with({ command = "prisma format" }),
 
     -- Lua
     formatting.stylua,

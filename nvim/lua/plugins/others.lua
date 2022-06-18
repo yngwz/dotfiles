@@ -24,7 +24,7 @@ M.blankline = function()
     end
 
     local options = {
-        indentLine_enabled = 1,
+        indentLine_enabled = 0,
         char = "▏",
         filetype_exclude = {
             "help",

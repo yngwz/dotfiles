@@ -122,6 +122,7 @@ local mapping = {
 local sources = {
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 9 },
+    { name = "treesitter", priority = 9 },
     { name = "npm", priority = 9 },
     {
         name = "buffer",
