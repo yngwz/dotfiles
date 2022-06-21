@@ -9,12 +9,19 @@ m.all = function()
         return true
     end
 
-    for name, _ in pairs(package.loaded) do
-        if name:match("^yngwz") then
-            plenary.reload.reload_module(name, true)
-            require(name)
-        end
+    plenary.reload.reload_module("yngwz", true)
+    dofile(vim.env.MYVIMRC)
+end
+
+m.module = function(name)
+    local present, plenary = pcall(require, "plenary")
+    if not present then
+        print("plenary not present to reload module")
+        return true
     end
+
+    plenary.reload.reload_module(name)
+    return require(name)
 end
 
 return m

@@ -6,6 +6,15 @@ _G.reload = function()
     vim.notify("Nvim config reloaded", vim.log.levels.INFO)
 end
 
+_G.P = function(v)
+    print(vim.inspect(v))
+    return v
+end
+
+_G.reload_module = function(name)
+    reload.module(name)
+end
+
 utils.map = function(mode, keys, command, opt)
     local options = { silent = true }
 
