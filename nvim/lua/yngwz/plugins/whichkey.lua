@@ -42,7 +42,7 @@ local options = {
     },
 }
 
-local mappings_present, mappings = pcall(require, "yngwz.mappings")
+local mappings_present, mappings = pcall(require, "yngwz.keymaps")
 
 if not mappings_present then
     wk.setup(options)

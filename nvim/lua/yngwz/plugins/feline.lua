@@ -1,11 +1,24 @@
 local present, feline = pcall(require, "feline")
 
 if not present then
+    print("No feline")
     return
 end
 
-local settings = {
-    components = require("catppuccin.core.integrations.feline"),
-}
+local ctp_present, ctp_feline = pcall(
+    require,
+    "catppuccin.groups.integrations.feline"
+)
 
-feline.setup(settings)
+if not ctp_present then
+    print("No catppuccin")
+    return
+end
+
+print("We got catppuccin")
+
+-- ctp_feline.setup()
+
+feline.setup({
+    components = ctp_feline.get(),
+})

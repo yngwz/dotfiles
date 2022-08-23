@@ -1,4 +1,4 @@
-local present, packer = pcall(require, "yngwz.plugins.packerInit")
+local present, packer = pcall(require, "yngwz.utils.packerInit")
 
 if not present then
     error("Packer couldn't load: " .. "\n\n" .. packer)
@@ -83,7 +83,15 @@ local plugins = {
         after = { "nvim-treesitter" },
     },
     {
+        "RRethy/vim-illuminate",
+        after = { "nvim-treesitter" },
+        config = function()
+            require("yngwz.plugins.vim-illuminate")
+        end,
+    },
+    {
         "m-demare/hlargs.nvim",
+        after = { "nvim-treesitter" },
         config = function()
             require("hlargs").setup()
         end,
@@ -132,13 +140,10 @@ local plugins = {
             require("yngwz.plugins.others").signature()
         end,
     },
-    {
-        "andymass/vim-matchup",
-        opt = true,
-        setup = function()
-            utils.packer_lazy_load("vim-matchup")
-        end,
-    },
+    -- {
+    --     "andymass/vim-matchup",
+    --     opt = true,
+    -- },
     {
         "jose-elias-alvarez/null-ls.nvim",
         after = "nvim-lspconfig",
