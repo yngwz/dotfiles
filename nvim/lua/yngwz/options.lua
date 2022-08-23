@@ -20,7 +20,7 @@ opt.cul = true -- cursor line
 
 -- Indentline
 opt.expandtab = true
-opt.shiftwidth = 4
+-- opt.shiftwidth = 4
 opt.smartindent = false
 opt.autoindent = false
 
@@ -59,6 +59,7 @@ opt.breakat = " "
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
+opt.inccommand = "nosplit"
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line

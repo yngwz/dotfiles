@@ -64,6 +64,20 @@ export PATH="/usr/local/opt/valet-php@7.3/sbin:$PATH"
 # Vim -> NeoVim
 alias vim="nvim"
 alias vi="nvim"
+alias v="nvim"
 alias misspell="~/bin/misspell"
+alias ngrok="~/ngrok"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bun completions
+[ -s "/Users/tim/.bun/_bun" ] && source "/Users/tim/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/tim/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/tim/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
