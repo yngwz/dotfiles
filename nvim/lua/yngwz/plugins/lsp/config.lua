@@ -7,7 +7,7 @@ end
 
 local M = {}
 
-local handlers = require("plugins.others").lsp_handlers()
+local handlers = require("yngwz.plugins.others").lsp_handlers()
 
 function M.on_attach(client, _)
     client.resolved_capabilities.document_formatting = false
@@ -52,54 +52,54 @@ if typescript_present then
         debug = false, -- enable debug logging for commands
         -- LSP Config options
         server = {
-            capabilities = require("plugins.lsp.servers.ts_server").capabilities,
+            capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
             handlers = handlers,
-            on_attach = require("plugins.lsp.servers.ts_server").on_attach,
+            on_attach = require("yngwz.plugins.lsp.servers.ts_server").on_attach,
         },
     })
 end
 
 lspconfig.tailwindcss.setup({
-    capabilities = require("plugins.lsp.servers.tailwindcss").capabilities,
-    filetypes = require("plugins.lsp.servers.tailwindcss").filetypes,
+    capabilities = require("yngwz.plugins.lsp.servers.tailwindcss").capabilities,
+    filetypes = require("yngwz.plugins.lsp.servers.tailwindcss").filetypes,
     handlers = handlers,
-    init_options = require("plugins.lsp.servers.tailwindcss").init_options,
-    on_attach = require("plugins.lsp.servers.tailwindcss").on_attach,
-    settings = require("plugins.lsp.servers.tailwindcss").settings,
+    init_options = require("yngwz.plugins.lsp.servers.tailwindcss").init_options,
+    on_attach = require("yngwz.plugins.lsp.servers.tailwindcss").on_attach,
+    settings = require("yngwz.plugins.lsp.servers.tailwindcss").settings,
 })
 
 -- lspconfig.eslint.setup({
 --     capabilities = capabilities,
 --     handlers = handlers,
---     on_attach = require("plugins.lsp.servers.eslint").on_attach,
---     settings = require("plugins.lsp.servers.eslint").settings,
+--     on_attach = require("yngwz.plugins.lsp.servers.eslint").on_attach,
+--     settings = require("yngwz.plugins.lsp.servers.eslint").settings,
 -- })
 
 lspconfig.jsonls.setup({
     capabilities = capabilities,
     handlers = handlers,
     on_attach = on_attach,
-    settings = require("plugins.lsp.servers.json").settings,
+    settings = require("yngwz.plugins.lsp.servers.json").settings,
 })
 
 lspconfig.sumneko_lua.setup({
     handlers = handlers,
-    on_attach = require("plugins.lsp.servers.lua").on_attach,
-    settings = require("plugins.lsp.servers.lua").settings,
+    on_attach = require("yngwz.plugins.lsp.servers.lua").on_attach,
+    settings = require("yngwz.plugins.lsp.servers.lua").settings,
 })
 
 -- lspconfig.emmet_ls.setup({
---     capabilities = require("plugins.lsp.servers.emmet").capabilities,
+--     capabilities = require("yngwz.plugins.lsp.servers.emmet").capabilities,
 --     handlers = handlers,
 --     on_attach = on_attach,
---     filetypes = require("plugins.lsp.servers.emmet").filetypes,
+--     filetypes = require("yngwz.plugins.lsp.servers.emmet").filetypes,
 -- })
 --
 lspconfig.prismals.setup({
     on_attach = on_attach,
-    filetypes = require("plugins.lsp.servers.prisma").filetypes,
-    capabilities = require("plugins.lsp.servers.prisma").capabilities,
-    settings = require("plugins.lsp.servers.prisma").settings,
+    filetypes = require("yngwz.plugins.lsp.servers.prisma").filetypes,
+    capabilities = require("yngwz.plugins.lsp.servers.prisma").capabilities,
+    settings = require("yngwz.plugins.lsp.servers.prisma").settings,
 })
 
 for _, server in ipairs({ "bashls", "cssls", "html", "prismals" }) do

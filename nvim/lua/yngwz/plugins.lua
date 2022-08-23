@@ -1,4 +1,4 @@
-local present, packer = pcall(require, "plugins.packerInit")
+local present, packer = pcall(require, "yngwz.plugins.packerInit")
 
 if not present then
     error("Packer couldn't load: " .. "\n\n" .. packer)
@@ -15,14 +15,14 @@ local plugins = {
         as = "catppuccin",
         after = "packer.nvim",
         config = function()
-            require("plugins.catppuccin")
+            require("yngwz.plugins.catppuccin")
         end,
     },
     {
         "kyazdani42/nvim-web-devicons",
         after = "catppuccin",
         config = function()
-            require("plugins.icons")
+            require("yngwz.plugins.icons")
         end,
     },
 
@@ -30,7 +30,7 @@ local plugins = {
         "feline-nvim/feline.nvim",
         after = "nvim-web-devicons",
         config = function()
-            require("plugins.feline")
+            require("yngwz.plugins.feline")
         end,
     },
 
@@ -38,21 +38,21 @@ local plugins = {
         "akinsho/bufferline.nvim",
         after = "nvim-web-devicons",
         config = function()
-            require("plugins.bufferline")
+            require("yngwz.plugins.bufferline")
         end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufRead",
         config = function()
-            require("plugins.others").blankline()
+            require("yngwz.plugins.others").blankline()
         end,
     },
     {
         "NvChad/nvim-colorizer.lua",
         event = { "BufRead" },
         config = function()
-            require("plugins.others").colorizer()
+            require("yngwz.plugins.others").colorizer()
         end,
     },
 
@@ -62,7 +62,7 @@ local plugins = {
         event = { "BufRead", "BufNewFile" },
         run = ":TSUpdate",
         config = function()
-            require("plugins.treesitter")
+            require("yngwz.plugins.treesitter")
         end,
     },
     {
@@ -92,7 +92,7 @@ local plugins = {
         "lewis6991/gitsigns.nvim",
         opt = true,
         config = function()
-            require("plugins.others").gitsigns()
+            require("yngwz.plugins.others").gitsigns()
         end,
         setup = function()
             utils.packer_lazy_load("gitsigns.nvim")
@@ -117,8 +117,8 @@ local plugins = {
         after = "nvim-lsp-installer",
         module = "lspconfig",
         config = function()
-            require("plugins.lsp.installer")
-            require("plugins.lsp.config")
+            require("yngwz.plugins.lsp.installer")
+            require("yngwz.plugins.lsp.config")
         end,
     },
     {
@@ -129,7 +129,7 @@ local plugins = {
         "ray-x/lsp_signature.nvim",
         after = "nvim-lspconfig",
         config = function()
-            require("plugins.others").signature()
+            require("yngwz.plugins.others").signature()
         end,
     },
     {
@@ -144,14 +144,14 @@ local plugins = {
         after = "nvim-lspconfig",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
-            require("plugins.lsp.null")
+            require("yngwz.plugins.lsp.null")
         end,
     },
     {
         "max397574/better-escape.nvim",
         event = "InsertCharPre",
         config = function()
-            require("plugins.others").better_escape()
+            require("yngwz.plugins.others").better_escape()
         end,
     },
 
@@ -166,14 +166,14 @@ local plugins = {
         wants = "friendly-snippets",
         before = "nvim-cmp",
         config = function()
-            require("plugins.luasnip")
+            require("yngwz.plugins.luasnip")
         end,
     },
     {
         "hrsh7th/nvim-cmp",
         after = "friendly-snippets",
         config = function()
-            require("plugins.cmp")
+            require("yngwz.plugins.cmp")
         end,
     },
     {
@@ -207,7 +207,7 @@ local plugins = {
         after = "cmp-path",
         requires = "nvim-lua/plenary.nvim",
         config = function()
-            require("plugins.cmp-npm")
+            require("yngwz.plugins.cmp-npm")
         end,
     },
     -- Misc
@@ -215,14 +215,14 @@ local plugins = {
         "windwp/nvim-autopairs",
         after = "nvim-cmp",
         config = function()
-            require("plugins.autoclose").autopairs()
+            require("yngwz.plugins.autoclose").autopairs()
         end,
     },
     {
         "windwp/nvim-ts-autotag",
         after = "nvim-treesitter",
         config = function()
-            require("plugins.autoclose").autotag()
+            require("yngwz.plugins.autoclose").autotag()
         end,
     },
     {
@@ -230,7 +230,7 @@ local plugins = {
         module = "Comment",
         keys = { "gc", "gb" },
         config = function()
-            require("plugins.comment")
+            require("yngwz.plugins.comment")
         end,
     },
     {
@@ -241,21 +241,21 @@ local plugins = {
         "kyazdani42/nvim-tree.lua",
         cmd = { "NvimTreeToggle", "NvimTreeFocus" },
         config = function()
-            require("plugins.nvimtree")
+            require("yngwz.plugins.nvimtree")
         end,
     },
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         config = function()
-            require("plugins.telescope")
+            require("yngwz.plugins.telescope")
         end,
     },
     {
         "rcarriga/nvim-notify",
         after = "telescope.nvim",
         config = function()
-            require("plugins.notify")
+            require("yngwz.plugins.notify")
         end,
     },
     {
@@ -265,7 +265,7 @@ local plugins = {
             utils.packer_lazy_load("which-key.nvim")
         end,
         config = function()
-            require("plugins.whichkey")
+            require("yngwz.plugins.whichkey")
         end,
     },
     {
@@ -279,7 +279,7 @@ local plugins = {
         "nmac427/guess-indent.nvim",
         event = { "BufRead", "BufNewFile" },
         config = function()
-            require("plugins.guess-indent")
+            require("yngwz.plugins.guess-indent")
         end,
     },
 }

@@ -10,7 +10,7 @@ if not snip_present then
     return
 end
 
-local kind_icons = require("plugins.lspkind_icons")
+local kind_icons = require("yngwz.plugins.lspkind_icons")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
