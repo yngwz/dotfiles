@@ -50,7 +50,7 @@ if typescript_present then
         disable_commands = false, -- prevent the plugin from creating Vim commands
         disable_formatting = false, -- disable tsserver's formatting capabilities
         debug = false, -- enable debug logging for commands
-        -- LSP Config options
+        -- LSP Config optionsconfig
         server = {
             capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
             handlers = handlers,
@@ -78,7 +78,7 @@ lspconfig.tailwindcss.setup({
 lspconfig.jsonls.setup({
     capabilities = capabilities,
     handlers = handlers,
-    on_attach = on_attach,
+    on_attach = require("yngwz.plugins.lsp.servers.json").on_attach,
     settings = require("yngwz.plugins.lsp.servers.json").settings,
 })
 
