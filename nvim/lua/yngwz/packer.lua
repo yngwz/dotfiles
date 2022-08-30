@@ -93,7 +93,7 @@ local plugins = {
         "m-demare/hlargs.nvim",
         after = { "nvim-treesitter" },
         config = function()
-            require("hlargs").setup()
+            require("yngwz.plugins.hlargs")
         end,
     },
     {
