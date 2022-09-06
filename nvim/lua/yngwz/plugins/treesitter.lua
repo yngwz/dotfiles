@@ -13,6 +13,7 @@ treesitter.setup({
     },
     highlight = {
         enable = true,
+        additional_vim_regex_highlighting = true,
         -- disable = { "c", "rust" },  -- list of language that will be disabled
         -- additional_vim_regex_highlighting = false,
     },
@@ -28,7 +29,7 @@ treesitter.setup({
     },
 
     indent = {
-        enable = false,
+        enable = true,
     },
 
     rainbow = {
