@@ -4,6 +4,16 @@ if not present then
     return
 end
 
+local catppuccin_present, catppuccin_colors = pcall(
+    require,
+    "catppuccin.palettes"
+)
+if not catppuccin_present then
+    print("no catppuccin colors available")
+end
+
+local colors = catppuccin_colors.get_palette()
+
 treesitter.setup({
     ensure_installed = "all", -- one of "all", or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
@@ -35,6 +45,19 @@ treesitter.setup({
     rainbow = {
         enable = true,
         extended_mode = true,
+        colors = {
+            colors.overlay2,
+            colors.peach,
+            colors.sky,
+            colors.pink,
+            colors.teal,
+            colors.lavendar,
+            colors.red,
+            colors.mauve,
+            colors.yellow,
+            colors.flamingo,
+            colors.sky,
+        },
     },
 
     context_commentstring = {

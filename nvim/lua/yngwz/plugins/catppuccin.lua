@@ -4,6 +4,8 @@ if not present then
     return
 end
 
+vim.g.catppuccin_flavour = "frappe"
+
 local settings = {
     transparent_background = false,
     term_colors = false,
@@ -55,7 +57,7 @@ local settings = {
         bufferline = true,
         markdown = true,
         lightspeed = false,
-        ts_rainbow = true,
+        ts_rainbow = false,
         hop = false,
         notify = true,
         telekasten = true,
