@@ -287,6 +287,9 @@ local plugins = {
             require("yngwz.plugins.guess-indent")
         end,
     },
+    {
+        "tpope/vim-repeat",
+    },
 }
 
 return packer.startup(function(use)
