@@ -1,6 +1,6 @@
-# ===========================================================================================================
+# ==========================================================
 # Plugins
-# ===========================================================================================================
+# ==========================================================
 
 # Load the Antigen plugin manager
 source $HOME/antigen.zsh
@@ -16,15 +16,31 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
-antigen theme robbyrussell
+# antigen theme robbyrussell
 
 antigen apply
 
+# ==========================================================
+# Aliases
+# ==========================================================
 
 
-# ===========================================================================================================
+# bun completions
+[ -s "/Users/tim/.bun/_bun" ] && source "/Users/tim/.bun/_bun"
+
+ # Al# Vim -> NeoVim
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
+alias misspell="~/bin/misspell"
+alias ngrok="~/ngrok"
+
+# Source zsh
+alias reload="source ~/.zshrc"
+
+# ==========================================================
 # Paths
-# ===========================================================================================================
+# ==========================================================
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -38,13 +54,6 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 
 export PATH="/usr/local/sbin:$PATH"
 
-export PATH="/usr/local/opt/valet-php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.3/sbin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.2/sbin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.3/sbin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -53,35 +62,18 @@ if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-clou
 
 # Path for flutter CLI tool
  export PATH="$PATH:$HOME/flutter/bin"
- 
- # Alias for aStorms build tool for magento: pestle ( https://github.com/astorm/pestle )
- 
- alias pestle="php $HOME/pestle.phar"
 
-export PATH="/usr/local/opt/valet-php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/valet-php@7.3/sbin:$PATH"
-
-# Vim -> NeoVim
-alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
-alias misspell="~/bin/misspell"
-alias ngrok="~/ngrok"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# bun completions
-[ -s "/Users/tim/.bun/_bun" ] && source "/Users/tim/.bun/_bun"
+# pnpm
+export PNPM_HOME="/Users/tim/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
 # Bun
 export BUN_INSTALL="/Users/tim/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# pnpm
-export PNPM_HOME="/Users/tim/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+
 
 # tabtab source for packages
-# uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # Not really sure what this is.
