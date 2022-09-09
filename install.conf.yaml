@@ -8,7 +8,7 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.config/tmux: tmux
-    ~/antigen.zsh: antigen.zsh
+    ~/.zsh: zsh
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

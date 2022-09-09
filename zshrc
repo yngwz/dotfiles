@@ -3,7 +3,7 @@
 # ==========================================================
 
 # Load the Antigen plugin manager
-source $HOME/antigen.zsh
+source $HOME/.zsh/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -17,6 +17,8 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
 # antigen theme robbyrussell
+
+source ~/.zsh/catppuccin-zsh-syntax-highlighting.zsh # Fancy syntax highlighting
 
 antigen apply
 
