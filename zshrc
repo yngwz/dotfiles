@@ -16,7 +16,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
-# antigen theme robbyrussell
+antigen theme robbyrussell
 
 source ~/.zsh/catppuccin-zsh-syntax-highlighting.zsh # Fancy syntax highlighting
 
@@ -38,7 +38,7 @@ alias misspell="~/bin/misspell"
 alias ngrok="~/ngrok"
 
 # Source zsh
-alias reload="source ~/.zshrc"
+alias reload="exec zsh"
 
 # ==========================================================
 # Paths
