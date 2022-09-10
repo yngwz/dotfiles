@@ -75,12 +75,12 @@ lspconfig.tailwindcss.setup({
 --     settings = require("yngwz.plugins.lsp.servers.eslint").settings,
 -- })
 
--- lspconfig.jsonls.setup({
---     capabilities = capabilities,
---     handlers = handlers,
---     on_attach = require("yngwz.plugins.lsp.servers.json").on_attach,
---     settings = require("yngwz.plugins.lsp.servers.json").settings,
--- })
+lspconfig.jsonls.setup({
+    capabilities = capabilities,
+    handlers = handlers,
+    on_attach = require("yngwz.plugins.lsp.servers.json").on_attach,
+    settings = require("yngwz.plugins.lsp.servers.json").settings,
+})
 
 lspconfig.sumneko_lua.setup({
     handlers = handlers,

@@ -10,7 +10,23 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
     -- webdev
-    formatting.prettierd,
+    formatting.prettierd({
+        filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "css",
+            "scss",
+            "less",
+            "html",
+            "yaml",
+            "markdown",
+            "graphql",
+            "handlebars",
+        },
+    }),
     formatting.rustywind,
 
     -- Lua
