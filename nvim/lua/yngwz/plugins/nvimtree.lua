@@ -6,7 +6,7 @@ end
 
 local options = { -- BEGIN_DEFAULT_OPTS
     auto_reload_on_write = true,
-    create_in_closed_folder = false,
+    create_in_closed_folder = true,
     disable_netrw = true,
     hijack_cursor = true,
     hijack_netrw = true,
@@ -90,6 +90,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
             "Makefile",
             "README.md",
             "readme.md",
+            ".prettierrc",
         },
     },
     hijack_directories = {
@@ -119,7 +120,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
     filters = {
         dotfiles = true,
         custom = {},
-        exclude = { ".env" },
+        exclude = { ".env", ".prettierrc" },
     },
     git = {
         enable = true,
