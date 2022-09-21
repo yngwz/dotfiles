@@ -290,6 +290,9 @@ local plugins = {
     {
         "tpope/vim-repeat",
     },
+    {
+        "ThePrimeagen/vim-be-good",
+    },
 }
 
 return packer.startup(function(use)
