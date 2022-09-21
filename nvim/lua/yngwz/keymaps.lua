@@ -1,6 +1,9 @@
 -- n, v, i are mode names
 
 local M = {}
+-- stylua: ignore start
+local savePaste = "\"_dP" --stylelua removes "\"
+-- stylua: ignore end
 
 M.general = {
     i = {
@@ -8,21 +11,17 @@ M.general = {
         -- go to  beginning and end
         ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
         ["<C-e>"] = { "<End>", "壟 end of line" },
-
-        -- navigate within insert mode
-        ["<C-h>"] = { "<Left>", "  move left" },
-        ["<C-l>"] = { "<Right>", " move right" },
-        ["<C-j>"] = { "<Down>", " move down" },
-        ["<C-k>"] = { "<Up>", " move up" },
     },
 
     n = {
-
         -- switch between windows
         ["<C-h>"] = { "<C-w>h", " window left" },
         ["<C-l>"] = { "<C-w>l", " window right" },
         ["<C-j>"] = { "<C-w>j", " window down" },
         ["<C-k>"] = { "<C-w>k", " window up" },
+
+        -- Delete & save the paste register
+        ["<leader>p"] = { savePaste, "Delete & save the paste register" },
 
         -- save
         ["<leader>w"] = { "<cmd> w <CR>", "﬚  save file" },
@@ -30,13 +29,6 @@ M.general = {
         -- Copy all
         ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
 
-        -- line numbers
-        ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
-        ["<leader>rn"] = {
-            "<cmd> set rnu! <CR>",
-            "   toggle relative number",
-        },
-        -- Search
         ["<Esc>"] = { "<cmd> noh <CR>", "Clear search highlight" },
     },
 }
