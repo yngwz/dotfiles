@@ -73,6 +73,9 @@ export PATH="$PNPM_HOME:$PATH"
 export BUN_INSTALL="/Users/tim/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Changes lazygit default config directory
+export XDG_CONFIG_HOME="$HOME/.config"
+
 
 
 # tabtab source for packages

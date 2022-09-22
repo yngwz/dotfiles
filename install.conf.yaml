@@ -8,6 +8,7 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.config/tmux: tmux
+    ~/.config/lazygit: lazygit
     ~/.tmux.conf: tmux/tmux.conf
     ~/.zsh: zsh
 
