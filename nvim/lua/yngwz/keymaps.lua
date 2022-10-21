@@ -59,6 +59,39 @@ M.bufferline = {
     },
 }
 
+M.DAP = {
+    n = {
+        ["<F5>"] = { '<cmd>lua require("dap").continue()<CR>', "Continue" },
+        ["<F3>"] = { '<cmd>lua require("dap").step_over()<CR>', "Step over" },
+        ["<F2>"] = { '<cmd>lua require("dap").step_into()<CR>', "Step into" },
+        ["<F12>"] = { '<cmd>lua require("dap").step_out()<CR>', "Step out" },
+        ["<leader>b"] = {
+            '<cmd>lua require("dap").toggle_breakpoint()<CR>',
+            "Toggle breakpoint",
+        },
+        ["<leader>B"] = {
+            '<cmd>lua require("dap")set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>',
+            "Conditional breakpoint",
+        },
+        ["<leader>lp"] = {
+            '<cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>',
+            "Log point message",
+        },
+        ["<leader>dr"] = {
+            '<cmd>lua require("dap").repl.open<CR>',
+            "Open REPL",
+        },
+        ["<leader>do"] = {
+            '<cmd>lua require("dapui").open()',
+            "Open DAP ui",
+        },
+        ["<leader>dc"] = {
+            '<cmd>lua require("dapui").close()',
+            "Close DAP UI",
+        },
+    },
+}
+
 M.comment = {
 
     -- toggle comment in both modes

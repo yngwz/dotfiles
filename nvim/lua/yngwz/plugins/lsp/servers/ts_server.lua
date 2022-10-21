@@ -1,6 +1,6 @@
 local M = {}
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(
+local capabilities = require("cmp_nvim_lsp").default_capabilities(
     vim.lsp.protocol.make_client_capabilities()
 )
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -41,8 +41,8 @@ capabilities.textDocument.codeAction = {
 local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
 
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)

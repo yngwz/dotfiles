@@ -8,10 +8,6 @@ hlargs.setup({
     {
         color = "#ef9062",
         highlight = {},
-        excluded_filetypes = { "NvimTree" },
-        disable = function(lang, bufnr) -- If changed, `excluded_filetypes` will be ignored
-            return vim.tbl_contains(opts.excluded_filetypes, lang)
-        end,
         paint_arg_declarations = true,
         paint_arg_usages = true,
         hl_priority = 10000,

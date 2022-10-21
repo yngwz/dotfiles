@@ -10,14 +10,14 @@ local M = {}
 local handlers = require("yngwz.plugins.others").lsp_handlers()
 
 function M.on_attach(client, _)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilitie.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if cmp_nvim_lsp_ok then
-    capabilities = cmp_nvim_lsp.update_capabilities(
+    capabilities = cmp_nvim_lsp.default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
     )
 end
@@ -44,20 +44,12 @@ local function on_attach(_, _)
     -- set up buffer keymaps, etc.
 end
 
--- It enables tsserver automatically so no need to call lspconfig.tsserver.setup
-if typescript_present then
-    typescript.setup({
-        disable_commands = false, -- prevent the plugin from creating Vim commands
-        disable_formatting = false, -- disable tsserver's formatting capabilities
-        debug = false, -- enable debug logging for commands
-        -- LSP Config optionsconfig
-        server = {
-            capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
-            handlers = handlers,
-            on_attach = require("yngwz.plugins.lsp.servers.ts_server").on_attach,
-        },
-    })
-end
+lspconfig.tsserver.setup({
+    on_attach = require("yngwz.plugins.lsp.servers.ts_server").on_attach,
+    capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    cmd = { "typescript-language-server", "--stdio" },
+})
 
 lspconfig.tailwindcss.setup({
     capabilities = require("yngwz.plugins.lsp.servers.tailwindcss").capabilities,

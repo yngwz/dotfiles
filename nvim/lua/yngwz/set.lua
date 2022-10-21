@@ -6,9 +6,6 @@ vim.cmd([[colorscheme catppuccin]])
 vim.o.runtimepath = vim.fn.stdpath("data")
     .. "/site/pack/*/start/*,"
     .. vim.o.runtimepath
--- use filetype.lua instead of filetype.vim
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1
 g.toggle_theme_icon = "   "
 
 opt.confirm = true
@@ -17,6 +14,7 @@ opt.title = true
 opt.clipboard = "unnamedplus"
 opt.cmdheight = 1
 opt.cul = true -- cursor line
+opt.cmdheight = 0
 
 -- Indentline
 opt.expandtab = true
@@ -26,7 +24,6 @@ opt.autoindent = false
 
 -- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
 opt.fillchars = { eob = " " }
-
 opt.hidden = true
 opt.ignorecase = true
 opt.smartcase = true

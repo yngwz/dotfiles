@@ -2,7 +2,7 @@ local M = {}
 
 M.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_range_formatting = false
 
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
@@ -54,6 +54,15 @@ M.settings = {
                 fileMatch = { "ecosystem.json" },
                 url = "https://json.schemastore.org/pm2-ecosystem.json",
             },
+            {
+                fileMatch = { "turbo.json" },
+                url = "https://turborepo.org/schema.json"
+            },
+            {
+                fileMatch = {"app.json"},
+                url= "https://json.schemastore.org/expo-46.0.0.json"
+            }
+
         },
     },
 }

@@ -1,11 +1,14 @@
+local utils = require("yngwz.utils")
 local core_modules = {
     "yngwz.packer",
     "yngwz.set",
-    "yngwz.utils",
     "yngwz.autocmds",
     "yngwz.cmds",
     "yngwz.keymaps",
 }
+
+vim.g.catppuccin_flavour = "frappe"
+vim.g.utils = utils
 
 for _, module in ipairs(core_modules) do
     local ok, err = pcall(require, module)

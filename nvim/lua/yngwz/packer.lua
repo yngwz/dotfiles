@@ -14,6 +14,7 @@ local plugins = {
         "catppuccin/nvim",
         as = "catppuccin",
         after = "packer.nvim",
+        run = ":CatppuccinCompile",
         config = function()
             require("yngwz.plugins.catppuccin")
         end,
@@ -108,30 +109,28 @@ local plugins = {
     },
 
     -- LSP
-
     {
-        "williamboman/nvim-lsp-installer",
-        opt = true,
-        setup = function()
-            utils.packer_lazy_load("nvim-lsp-installer")
-            -- reload the current file so lsp actually starts for it
-            vim.defer_fn(function()
-                vim.cmd('if &ft == "packer" | echo "" | else | silent! e %')
-            end, 0)
+        "williamboman/mason.nvim",
+        config = function()
+            require("yngwz.plugins.lsp.mason").mason()
+        end,
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        after = "mason.nvim",
+        config = function()
+            require("yngwz.plugins.lsp.mason").masonConfig()
         end,
     },
     {
         "neovim/nvim-lspconfig",
-        after = "nvim-lsp-installer",
-        module = "lspconfig",
+        after = "mason-lspconfig.nvim",
         config = function()
-            require("yngwz.plugins.lsp.installer")
             require("yngwz.plugins.lsp.config")
         end,
     },
     {
         "jose-elias-alvarez/typescript.nvim",
-        after = "nvim-lsp-installer",
     },
     {
         "ray-x/lsp_signature.nvim",
@@ -140,6 +139,11 @@ local plugins = {
             require("yngwz.plugins.others").signature()
         end,
     },
+    {
+        "glepnir/lspsaga.nvim",
+        after = "nvim-lspconfig",
+    },
+
     -- {
     --     "andymass/vim-matchup",
     --     opt = true,
@@ -150,13 +154,6 @@ local plugins = {
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
             require("yngwz.plugins.lsp.null")
-        end,
-    },
-    {
-        "max397574/better-escape.nvim",
-        event = "InsertCharPre",
-        config = function()
-            require("yngwz.plugins.others").better_escape()
         end,
     },
 
@@ -215,7 +212,36 @@ local plugins = {
             require("yngwz.plugins.cmp-npm")
         end,
     },
+
+    -- DAP
+    {
+        "mfussenegger/nvim-dap",
+        requires = {
+            "jayp0521/mason-nvim-dap.nvim",
+        },
+        config = function()
+            require("yngwz.plugins.dap")
+        end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        requires = { "mfussenegger/nvim-dap" },
+        config = function()
+            require("dapui").setup()
+        end,
+    },
+    {
+        "theHamsta/nvim-dap-virtual-text",
+    },
+
     -- Misc
+    {
+        "max397574/better-escape.nvim",
+        event = "InsertCharPre",
+        config = function()
+            require("yngwz.plugins.others").better_escape()
+        end,
+    },
     {
         "windwp/nvim-autopairs",
         after = "nvim-cmp",
@@ -292,6 +318,9 @@ local plugins = {
     },
     {
         "ThePrimeagen/vim-be-good",
+    },
+    {
+        "MaxMEllon/vim-jsx-pretty",
     },
 }
 

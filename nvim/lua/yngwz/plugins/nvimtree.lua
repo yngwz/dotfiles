@@ -22,7 +22,6 @@ local options = { -- BEGIN_DEFAULT_OPTS
     view = {
         adaptive_size = false,
         width = 30,
-        height = 30,
         hide_root_folder = true,
         side = "left",
         preserve_window_proportions = false,
@@ -91,6 +90,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
             "README.md",
             "readme.md",
             ".prettierrc",
+            ".eslintrc.*",
         },
     },
     hijack_directories = {
@@ -120,7 +120,15 @@ local options = { -- BEGIN_DEFAULT_OPTS
     filters = {
         dotfiles = true,
         custom = {},
-        exclude = { ".env", ".prettierrc" },
+        exclude = {
+            ".env",
+            ".prettierrc",
+            ".eslintrc.js",
+            ".eslintrc.cjs",
+            ".eslintrc.yaml",
+            ".eslintrc.yml",
+            ".eslintrc.json",
+        },
     },
     git = {
         enable = true,
