@@ -11,9 +11,12 @@ antigen use oh-my-zsh
 antigen bundle command-not-found
 antigen bundle jsontools
 
+antigen bundle zsh-users/deno
+
 # Syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+
 
 # Load the theme
 antigen theme robbyrussell
@@ -76,7 +79,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Changes lazygit default config directory
 export XDG_CONFIG_HOME="$HOME/.config"
 
-
+# Deno
+export DENO_INSTALL="/Users/tim/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # tabtab source for packages
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
