@@ -37,8 +37,8 @@ local options = { -- BEGIN_DEFAULT_OPTS
     },
     renderer = {
         add_trailing = false,
-        group_empty = false,
-        highlight_git = false,
+        group_empty = true,
+        highlight_git = true,
         highlight_opened_files = "none",
         root_folder_modifier = ":~",
         indent_markers = {
@@ -91,6 +91,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
             "readme.md",
             ".prettierrc",
             ".eslintrc.*",
+            "node_modules",
         },
     },
     hijack_directories = {
@@ -118,7 +119,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
         },
     },
     filters = {
-        dotfiles = true,
+        dotfiles = false,
         custom = {},
         exclude = {
             ".env",
@@ -128,6 +129,7 @@ local options = { -- BEGIN_DEFAULT_OPTS
             ".eslintrc.yaml",
             ".eslintrc.yml",
             ".eslintrc.json",
+            ".github",
         },
     },
     git = {

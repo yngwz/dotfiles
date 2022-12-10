@@ -12,6 +12,24 @@ local handlers = require("yngwz.plugins.others").lsp_handlers()
 function M.on_attach(client, _)
     client.server_capabilitie.document_formatting = false
     client.server_capabilities.document_range_formatting = false
+    local active_clients = vim.lsp.get_active_clients()
+
+    -- Prevent conflict between denols tsserver
+    if client.name == "denols" then
+        for _, client_ in pairs(active_clients) do
+            -- stop tsserver if denols is already active
+            if client_.name == "tsserver" then
+                client_.stop()
+            end
+        end
+    elseif client.name == "tsserver" then
+        for _, client_ in pairs(active_clients) do
+            -- prevent tsserver from starting if denols is already active
+            if client_.name == "denols" then
+                client.stop()
+            end
+        end
+    end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -44,12 +62,27 @@ local function on_attach(_, _)
     -- set up buffer keymaps, etc.
 end
 
-lspconfig.tsserver.setup({
-    on_attach = require("yngwz.plugins.lsp.servers.ts_server").on_attach,
-    capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-    cmd = { "typescript-language-server", "--stdio" },
+typescript.setup({
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false, -- enable debug logging for commands
+    go_to_source_definition = {
+        fallback = true, -- fall back to standard LSP definition on failure
+    },
+    server = { -- pass options to lspconfig's setup method
+        on_attach = require("yngwz.plugins.lsp.servers.ts_server").on_attach,
+        capabilities = require("yngwz.plugins.lsp.servers.ts_server").capabilities,
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        cmd = { "typescript-language-server", "--stdio" },
+        root_dir = lspconfig.util.root_pattern(
+            "package.json",
+            "tsconfig.json",
+            "gulpfile.js",
+            "node_modules"
+        ),
+    },
 })
+
+-- lspconfig.tsserver.setup({})
 
 lspconfig.tailwindcss.setup({
     capabilities = require("yngwz.plugins.lsp.servers.tailwindcss").capabilities,
@@ -58,14 +91,12 @@ lspconfig.tailwindcss.setup({
     init_options = require("yngwz.plugins.lsp.servers.tailwindcss").init_options,
     on_attach = require("yngwz.plugins.lsp.servers.tailwindcss").on_attach,
     settings = require("yngwz.plugins.lsp.servers.tailwindcss").settings,
+    -- root_dir = lspconfig.util.root_pattern("package.json"),
 })
 
--- lspconfig.eslint.setup({
---     capabilities = capabilities,
---     handlers = handlers,
---     on_attach = require("yngwz.plugins.lsp.servers.eslint").on_attach,
---     settings = require("yngwz.plugins.lsp.servers.eslint").settings,
--- })
+lspconfig.denols.setup({
+    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+})
 
 lspconfig.jsonls.setup({
     capabilities = capabilities,
@@ -80,13 +111,6 @@ lspconfig.sumneko_lua.setup({
     settings = require("yngwz.plugins.lsp.servers.lua").settings,
 })
 
--- lspconfig.emmet_ls.setup({
---     capabilities = require("yngwz.plugins.lsp.servers.emmet").capabilities,
---     handlers = handlers,
---     on_attach = on_attach,
---     filetypes = require("yngwz.plugins.lsp.servers.emmet").filetypes,
--- })
---
 lspconfig.prismals.setup({
     on_attach = on_attach,
     filetypes = require("yngwz.plugins.lsp.servers.prisma").filetypes,

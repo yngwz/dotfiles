@@ -44,6 +44,15 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
 
+    local active_clients = vim.lsp.get_active_clients()
+
+    for _, client_ in pairs(active_clients) do
+        -- prevent tsserver from starting if denols is already active
+        if client_.name == "denols" then
+            client.stop()
+        end
+    end
+
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
     end

@@ -1,14 +1,16 @@
-local dap = require("dap")
-if not dap then
+local dap_p, dap = pcall(require, "dap")
+
+if not dap_p then
     return
 end
 
-local mason_dap = require("mason-nvim-dap")
-if not mason_dap then
+local mason_p, mason = pcall(require, "mason-nvim-dap")
+
+if not mason_p then
     return
 end
 
-mason_dap.setup({
+mason.setup({
     ensure_installed = {
         "chrome",
         "node2",
@@ -26,6 +28,45 @@ dap.adapters.node2 = {
             .. "/.local/share/nvim/mason/packages/node-debug2-adapter/out/src/nodeDebug.js",
     },
 }
+
+local vscode_p, vscode = pcall(require, "dap-vscode-js")
+if not vscode_p then
+    return
+end
+
+vscode.setup({
+    -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+    -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug",  Path to vscode-js-debug installation.
+    debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+    adapters = {
+        "pwa-node",
+        "pwa-chrome",
+        "pwa-msedge",
+        "node-terminal",
+        "pwa-extensionHost",
+    }, -- which adapters to register in nvim-dap
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+    dap.configurations[language] = {
+        {
+            {
+                type = "pwa-node",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+            },
+            {
+                type = "pwa-node",
+                request = "attach",
+                name = "Attach",
+                processId = require("dap.utils").pick_process,
+                cwd = "${workspaceFolder}",
+            },
+        },
+    }
+end
 
 -- Adapters: Chrome
 dap.adapters.chrome = {

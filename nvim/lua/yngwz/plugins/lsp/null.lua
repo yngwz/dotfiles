@@ -25,10 +25,16 @@ local sources = {
             "markdown",
             "graphql",
             "handlebars",
+            "json",
+            "jsonc",
         },
     }),
     formatting.rustywind,
-    diagnostics.eslint_d,
+    diagnostics.eslint_d.with({
+        condition = function(utils)
+            return utils.root_has_file({ "package.json" })
+        end,
+    }),
 
     -- Lua
     formatting.stylua,
