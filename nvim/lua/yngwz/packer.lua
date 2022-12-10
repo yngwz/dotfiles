@@ -205,6 +205,9 @@ local plugins = {
     { "hrsh7th/cmp-cmdline", after = "cmp-path" },
     { "hrsh7th/cmp-calc", after = "cmp-cmdline" },
     {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+    },
+    {
         "David-Kunz/cmp-npm",
         after = "cmp-path",
         requires = "nvim-lua/plenary.nvim",
@@ -223,6 +226,12 @@ local plugins = {
             require("yngwz.plugins.dap")
         end,
     },
+    {
+        "microsoft/vscode-js-debug",
+        opt = true,
+        run = "npm install --legacy-peer-deps && npm run compile",
+    },
+    { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
     {
         "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
@@ -317,10 +326,16 @@ local plugins = {
         "tpope/vim-repeat",
     },
     {
-        "ThePrimeagen/vim-be-good",
+        "tpope/vim-obsession",
+    },
+    {
+        "tpope/vim-fugitive",
     },
     {
         "MaxMEllon/vim-jsx-pretty",
+    },
+    {
+        "ThePrimeagen/vim-be-good",
     },
 }
 
