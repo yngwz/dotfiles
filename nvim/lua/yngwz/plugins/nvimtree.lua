@@ -6,7 +6,6 @@ end
 
 local options = { -- BEGIN_DEFAULT_OPTS
     auto_reload_on_write = true,
-    create_in_closed_folder = true,
     disable_netrw = true,
     hijack_cursor = true,
     hijack_netrw = true,

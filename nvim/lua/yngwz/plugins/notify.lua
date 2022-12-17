@@ -1,6 +1,6 @@
 local present, notify = pcall(require, "notify")
 if not present then
-    print("notify is absent ")
+    print("notify is absent")
     return
 end
 
