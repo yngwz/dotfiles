@@ -5,6 +5,8 @@ local core_modules = {
     "yngwz.autocmds",
     "yngwz.cmds",
     "yngwz.keymaps",
+    "yngwz.lsp",
+    "yngwz.plugins",
 }
 
 vim.g.catppuccin_flavour = "frappe"

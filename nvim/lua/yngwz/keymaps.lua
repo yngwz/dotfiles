@@ -7,12 +7,10 @@ local savePaste = "\"_dP" --stylelua removes "\"
 
 M.general = {
     i = {
-
         -- go to  beginning and end
         ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
         ["<C-e>"] = { "<End>", "壟 end of line" },
     },
-
     n = {
         -- switch between windows
         ["<C-h>"] = { "<C-w>h", " window left" },
@@ -34,7 +32,6 @@ M.general = {
 }
 
 M.bufferline = {
-
     n = {
         -- new buffer
         ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
@@ -93,7 +90,6 @@ M.DAP = {
 }
 
 M.comment = {
-
     -- toggle comment in both modes
     n = {
         ["<leader>/"] = {
@@ -101,7 +97,6 @@ M.comment = {
             "蘒  toggle comment",
         },
     },
-
     v = {
         ["<leader>/"] = {
             "<cmd> lua require('Comment.api').toggle_current_linewise_op(vim.fn.visualmode())<CR>",
@@ -156,17 +151,15 @@ M.lspconfig = {
             "   lsp definition type",
         },
 
-        ["<leader>ra"] = {
+        ["<leader>rn"] = {
             function()
-                vim.lsp.buf.rename()
+                return ":IncRename " .. vim.fn.expand("<cword>")
             end,
-            "   lsp rename",
+            "  rename",
         },
 
         ["<leader>ca"] = {
-            function()
-                vim.lsp.buf.code_action()
-            end,
+            "<cmd>CodeActionMenu<cr>",
             "   lsp code_action",
         },
 
@@ -257,7 +250,6 @@ M.packer = {
 }
 
 M.nvimtree = {
-
     n = {
         -- toggle
         ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },

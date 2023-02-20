@@ -1,12 +1,42 @@
-local present, packer = pcall(require, "yngwz.utils.packerInit")
+local fn = vim.fn
 
-if not present then
-    error("Packer couldn't load: " .. "\n\n" .. packer)
-    return false
+-- Automatically install packer
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = fn.system({
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    })
+    print("Installing packer close and reopen Neovim...")
+    vim.cmd([[packadd packer.nvim]])
 end
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
+
+local packer = require("packer")
+
+-- Have packer use a popup window
+packer.init({
+    display = {
+        open_fn = function()
+            return require("packer.util").float({ border = "rounded" })
+        end,
+    },
+})
 
 local plugins = {
     { "nvim-lua/plenary.nvim" },
+    { "miversen33/import.nvim" },
     { "lewis6991/impatient.nvim" },
     { "wbthomason/packer.nvim", event = "VimEnter" },
     -- Theme
@@ -109,53 +139,74 @@ local plugins = {
     },
 
     -- LSP
-    {
-        "williamboman/mason.nvim",
-        config = function()
-            require("yngwz.plugins.lsp.mason").mason()
-        end,
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        after = "mason.nvim",
-        config = function()
-            require("yngwz.plugins.lsp.mason").masonConfig()
-        end,
-    },
-    {
-        "neovim/nvim-lspconfig",
-        after = "mason-lspconfig.nvim",
-        config = function()
-            require("yngwz.plugins.lsp.config")
-        end,
-    },
-    {
-        "jose-elias-alvarez/typescript.nvim",
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        after = "nvim-lspconfig",
-        config = function()
-            require("yngwz.plugins.others").signature()
-        end,
-    },
-    {
-        "glepnir/lspsaga.nvim",
-        after = "nvim-lspconfig",
-    },
-
     -- {
-    --     "andymass/vim-matchup",
-    --     opt = true,
+    --     "williamboman/mason.nvim",
+    --     config = function()
+    --         require("yngwz.plugins.lsp.mason").mason()
+    --     end,
     -- },
+    -- {
+    --     "williamboman/mason-lspconfig.nvim",
+    --     after = "mason.nvim",
+    --     config = function()
+    --         require("yngwz.plugins.lsp.mason").masonConfig()
+    --     end,
+    -- },
+    -- {
+    --     "neovim/nvim-lspconfig",
+    --     after = "mason-lspconfig.nvim",
+    --     config = function()
+    --         require("yngwz.plugins.lsp.config")
+    --     end,
+    -- },
+    -- {
+    --     "jose-elias-alvarez/typescript.nvim",
+    -- },
+    -- {
+    --     "ray-x/lsp_signature.nvim",
+    --     after = "nvim-lspconfig",
+    --     config = function()
+    --         require("yngwz.plugins.others").signature()
+    --     end,
+    -- },
+    -- {
+    --     "glepnir/lspsaga.nvim",
+    --     after = "nvim-lspconfig",
+    -- },
+    --
+    -- -- {
+    -- --     "andymass/vim-matchup",
+    -- --     opt = true,
+    -- -- },
+    -- {
+    --     "jose-elias-alvarez/null-ls.nvim",
+    --     after = "nvim-lspconfig",
+    --     requires = { "nvim-lua/plenary.nvim" },
+    --     config = function()
+    --         require("yngwz.plugins.lsp.null")
+    --     end,
+    -- },
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
+    { "neovim/nvim-lspconfig" },
+    { "b0o/SchemaStore.nvim" },
+    { "jose-elias-alvarez/typescript.nvim" },
+    { "simrat39/symbols-outline.nvim" },
+    { "j-hui/fidget.nvim" },
+    { "ray-x/lsp_signature.nvim" },
+    { "smjonas/inc-rename.nvim" },
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        after = "nvim-lspconfig",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("yngwz.plugins.lsp.null")
-        end,
+        "weilbith/nvim-code-action-menu",
+        cmd = "CodeActionMenu",
     },
+    { "kosayoda/nvim-lightbulb" },
+    { "jose-elias-alvarez/null-ls.nvim" },
+    { "jayp0521/mason-null-ls.nvim" },
+    { "gpanders/editorconfig.nvim" },
+    { "folke/trouble.nvim" },
+    { "smiteshp/nvim-navic" },
+    { "utilyre/barbecue.nvim" },
+    { "simrat39/rust-tools.nvim" },
 
     -- CMP
     {
@@ -321,6 +372,11 @@ local plugins = {
         config = function()
             require("yngwz.plugins.guess-indent")
         end,
+    },
+
+    -- UI
+    {
+        "stevearc/dressing.nvim",
     },
     {
         "tpope/vim-repeat",
