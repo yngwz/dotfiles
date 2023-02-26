@@ -26,7 +26,6 @@ import(
 
         masonLspConfig.setup({
             ensure_installed = {
-                "sumneko_lua",
                 "jsonls",
                 "tsserver",
                 "eslint",
