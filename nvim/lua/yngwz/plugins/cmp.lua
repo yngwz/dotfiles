@@ -3,6 +3,8 @@ if not cmp_present then
     return
 end
 
+-- Add 1 + 1 to equal 2
+
 local cmp_window = require("cmp.utils.window")
 
 local snip_present, lua_snip = pcall(require, "luasnip")
