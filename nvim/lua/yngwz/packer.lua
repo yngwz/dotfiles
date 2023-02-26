@@ -139,54 +139,8 @@ local plugins = {
     },
 
     -- LSP
-    -- {
-    --     "williamboman/mason.nvim",
-    --     config = function()
-    --         require("yngwz.plugins.lsp.mason").mason()
-    --     end,
-    -- },
-    -- {
-    --     "williamboman/mason-lspconfig.nvim",
-    --     after = "mason.nvim",
-    --     config = function()
-    --         require("yngwz.plugins.lsp.mason").masonConfig()
-    --     end,
-    -- },
-    -- {
-    --     "neovim/nvim-lspconfig",
-    --     after = "mason-lspconfig.nvim",
-    --     config = function()
-    --         require("yngwz.plugins.lsp.config")
-    --     end,
-    -- },
-    -- {
-    --     "jose-elias-alvarez/typescript.nvim",
-    -- },
-    -- {
-    --     "ray-x/lsp_signature.nvim",
-    --     after = "nvim-lspconfig",
-    --     config = function()
-    --         require("yngwz.plugins.others").signature()
-    --     end,
-    -- },
-    -- {
-    --     "glepnir/lspsaga.nvim",
-    --     after = "nvim-lspconfig",
-    -- },
-    --
-    -- -- {
-    -- --     "andymass/vim-matchup",
-    -- --     opt = true,
-    -- -- },
-    -- {
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     after = "nvim-lspconfig",
-    --     requires = { "nvim-lua/plenary.nvim" },
-    --     config = function()
-    --         require("yngwz.plugins.lsp.null")
-    --     end,
-    -- },
     { "williamboman/mason.nvim" },
+    { "github/copilot.vim.git" },
     { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
     { "b0o/SchemaStore.nvim" },
