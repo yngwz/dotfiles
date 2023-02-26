@@ -140,7 +140,6 @@ local plugins = {
 
     -- LSP
     { "williamboman/mason.nvim" },
-    { "github/copilot.vim.git" },
     { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
     { "b0o/SchemaStore.nvim" },
@@ -163,52 +162,38 @@ local plugins = {
     { "simrat39/rust-tools.nvim" },
 
     -- CMP
-    {
-        "rafamadriz/friendly-snippets",
-        module = "cmp_nvim_lsp",
-        event = "InsertEnter",
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        wants = "friendly-snippets",
-        before = "nvim-cmp",
-        config = function()
-            require("yngwz.plugins.luasnip")
-        end,
-    },
+    --
     {
         "hrsh7th/nvim-cmp",
-        after = "friendly-snippets",
         config = function()
             require("yngwz.plugins.cmp")
         end,
     },
     {
-        "saadparwaiz1/cmp_luasnip",
-        after = "LuaSnip",
-    },
-    {
-        "hrsh7th/cmp-nvim-lua",
-        after = "cmp_luasnip",
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp",
-        after = "cmp-nvim-lua",
-    },
-    {
         "hrsh7th/cmp-buffer",
-        after = "cmp-nvim-lsp",
     },
     {
         "hrsh7th/cmp-path",
-        after = "cmp-buffer",
+    },
+    { "hrsh7th/cmp-cmdline", after = "cmp-path" },
+    {
+        "saadparwaiz1/cmp_luasnip",
+    },
+    {
+        "L3MON4D3/LuaSnip",
+    },
+    {
+        "rafamadriz/friendly-snippets",
+    },
+    {
+        "hrsh7th/cmp-nvim-lsp",
+    },
+    {
+        "hrsh7th/cmp-nvim-lua",
     },
     {
         "ray-x/cmp-treesitter",
-        after = "cmp-path",
     },
-    { "hrsh7th/cmp-cmdline", after = "cmp-path" },
-    { "hrsh7th/cmp-calc", after = "cmp-cmdline" },
     {
         "hrsh7th/cmp-nvim-lsp-signature-help",
     },
@@ -220,6 +205,8 @@ local plugins = {
             require("yngwz.plugins.cmp-npm")
         end,
     },
+    { "zbirenbaum/copilot.lua" },
+    { "zbirenbaum/copilot-cmp" },
 
     -- DAP
     {
@@ -231,12 +218,12 @@ local plugins = {
             require("yngwz.plugins.dap")
         end,
     },
-    {
-        "microsoft/vscode-js-debug",
-        opt = true,
-        run = "npm install --legacy-peer-deps && npm run compile",
-    },
-    { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
+    -- {
+    --     "microsoft/vscode-js-debug",
+    --     opt = true,
+    --     run = "npm install --legacy-peer-deps && npm run compile",
+    -- },
+    -- { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
     {
         "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
