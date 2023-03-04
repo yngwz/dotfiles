@@ -4,13 +4,13 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system({
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    })
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path,
+        })
     print("Installing packer close and reopen Neovim...")
     vim.cmd([[packadd packer.nvim]])
 end
@@ -38,7 +38,7 @@ local plugins = {
     { "nvim-lua/plenary.nvim" },
     { "miversen33/import.nvim" },
     { "lewis6991/impatient.nvim" },
-    { "wbthomason/packer.nvim", event = "VimEnter" },
+    { "wbthomason/packer.nvim",  event = "VimEnter" },
     -- Theme
     {
         "catppuccin/nvim",
@@ -205,8 +205,12 @@ local plugins = {
             require("yngwz.plugins.cmp-npm")
         end,
     },
-    { "zbirenbaum/copilot.lua" },
-    { "zbirenbaum/copilot-cmp" },
+    { "onsails/lspkind.nvim" },
+    {
+        "zbirenbaum/copilot.lua",
+        event = "InsertEnter",
+    },
+    { "zbirenbaum/copilot-cmp", after = "copilot.lua" },
 
     -- DAP
     {
@@ -337,7 +341,7 @@ local plugins = {
 }
 
 return packer.startup(function(use)
-    for _, v in pairs(plugins) do
-        use(v)
-    end
-end)
+        for _, v in pairs(plugins) do
+            use(v)
+        end
+    end)
