@@ -6,7 +6,14 @@ import(
         local null_ls = modules["null-ls"]
 
         mason_null_ls.setup({
-            ensure_installed = { "stylua", "prettier", "rustywind" },
+            ensure_installed = {
+                "stylua",
+                "prettier",
+                "rustywind",
+                "black",
+                "isort",
+                "flake8",
+            },
         })
 
         mason_null_ls.setup_handlers({
@@ -17,6 +24,11 @@ import(
             end,
             stylua = function()
                 null_ls.register(null_ls.builtins.formatting.stylua)
+            end,
+            flake8 = function()
+                null_ls.register(null_ls.builtins.diagnostics.flake8.with({
+                    args = { "--ignore=E501" },
+                }))
             end,
         })
 
