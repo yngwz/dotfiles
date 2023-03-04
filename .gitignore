@@ -6,3 +6,4 @@ tmux-client-*.log
 
 
 lazygit/state.yml
+env-vars

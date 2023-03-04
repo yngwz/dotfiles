@@ -4,6 +4,7 @@
 
 # Load the Antigen plugin manager
 source $HOME/.zsh/antigen.zsh
+source ~/.env-vars
 
 antigen use oh-my-zsh
 
@@ -71,9 +72,6 @@ export GOOGLE_APPLICATION_CREDENTIALS="/Users/tim/Projects/expo-extract/expo-ext
 export PNPM_HOME="/Users/tim/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-
-# Open AI Key
-export OPENAI_API_KEY="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"
 
 # Bun
 export BUN_INSTALL="/Users/tim/.bun"
