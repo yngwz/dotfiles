@@ -3,8 +3,6 @@ if not cmp_present then
     return
 end
 
--- Add 1 + 1 to equal 2
-
 local cmp_window = require("cmp.utils.window")
 
 local snip_present, lua_snip = pcall(require, "luasnip")
@@ -12,11 +10,15 @@ if not snip_present then
     return
 end
 
-local kind_icons = require("yngwz.plugins.lspkind_icons")
+local lspkind = require("lspkind")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.opt.completeopt = "menuone,noselect"
+
+local has_copilot, copilot_cmp = pcall(require, "copilot_cmp.comparators")
+
+-- Write a function that adds two numbers
 
 -- Utils
 local check_backspace = function()
@@ -24,29 +26,17 @@ local check_backspace = function()
     return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
-local function border(hl_name)
-    return {
-        { "╭", hl_name },
-        { "─", hl_name },
-        { "╮", hl_name },
-        { "│", hl_name },
-        { "╯", hl_name },
-        { "─", hl_name },
-        { "╰", hl_name },
-        { "│", hl_name },
-    }
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        return false
+    end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0
+        and vim.api
+        .nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]
+        :match("^%s*$")
+        == nil
 end
-
-local buffer_option = {
-    -- Complete from all visible buffers (splits)
-    get_bufnrs = function()
-        local bufs = {}
-        for _, win in ipairs(vim.api.nvim_list_wins()) do
-            bufs[vim.api.nvim_win_get_buf(win)] = true
-        end
-        return vim.tbl_keys(bufs)
-    end,
-}
 
 -- Setup
 function cmp_window:has_scrollbar()
@@ -54,12 +44,8 @@ function cmp_window:has_scrollbar()
 end
 
 local window = {
-    completion = {
-        border = border("CmpBorder"),
-    },
-    documentation = {
-        border = border("CmpDocBorder"),
-    },
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
 }
 
 local snippet = {
@@ -69,27 +55,41 @@ local snippet = {
 }
 
 local formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(_, vim_item)
-        vim_item.menu = vim_item.kind
-        vim_item.kind = kind_icons[vim_item.kind]
-        return vim_item
-    end,
-    expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-    end,
+    fields = { "abbr", "kind", "menu" },
+    format = lspkind.cmp_format({
+        mode = "symbol_text",
+        symbol_map = {
+            Copilot = "",
+        },
+        before = function(entry, vim_item)
+            vim_item.menu = ({
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[Snippet]",
+                    buffer = "[Buffer]",
+                    path = "[Path]",
+                })[entry.source.name]
+            return vim_item
+        end,
+    }),
 }
 
 local mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs( -4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
+    ["<C-s>"] = cmp.mapping.complete({
+        config = {
+            sources = {
+                { name = "copilot" },
+            },
+        },
+    }),
     ["<CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
+        select = false,
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -110,8 +110,8 @@ local mapping = {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
             cmp.select_prev_item()
-        elseif lua_snip.jumpable(-1) then
-            lua_snip.jump(-1)
+        elseif lua_snip.jumpable( -1) then
+            lua_snip.jump( -1)
         else
             fallback()
         end
@@ -122,31 +122,44 @@ local mapping = {
 }
 
 local sources = {
-    { name = "nvim_lsp", priority = 9 },
-    { name = "luasnip", priority = 9 },
-    { name = "nvim_lsp_signature_help" },
-    { name = "treesitter", priority = 9 },
-    { name = "npm", priority = 9 },
+    { name = "nvim_lsp",                group_index = 2 },
+    { name = "copilot",                 group_index = 2 },
+    { name = "luasnip",                 group_index = 2 },
+    { name = "nvim_lsp_signature_help", group_index = 2 },
+    { name = "treesitter",              group_index = 2 },
+    { name = "npm",                     group_index = 2 },
     {
         name = "buffer",
-        priority = 7,
-        keyword_length = 5,
-        option = buffer_option,
+        group_index = 2,
     },
-    { name = "nvim_lua", priority = 5 },
-    { name = "path", priority = 4 },
-    { name = "calc", priority = 3 },
+    { name = "path", group_index = 2 },
 }
 
 local sorting = {
+    --keep priority weight at 2 for much closer matches to appear above copilot
+    --set to 1 to make copilot always appear on top
+    priority_weight = 1,
     comparators = {
+        -- order matters here
         cmp.config.compare.exact,
-        cmp.config.compare.locality,
-        cmp.config.compare.recently_used,
-        cmp.config.compare.score,
+        has_copilot and copilot_cmp.prioritize or nil,
+        has_copilot and copilot_cmp.score or nil,
         cmp.config.compare.offset,
+        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+        cmp.config.compare.score,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
         cmp.config.compare.sort_text,
+        cmp.config.compare.length,
         cmp.config.compare.order,
+        -- personal settings:
+        -- cmp.config.compare.recently_used,
+        -- cmp.config.compare.offset,
+        -- cmp.config.compare.score,
+        -- cmp.config.compare.sort_text,
+        -- cmp.config.compare.length,
+        -- cmp.config.compare.order,
     },
 }
 
@@ -158,7 +171,11 @@ local confirmation = {
 
 local experimental = {
     native_menu = false,
-    ghost_text = false,
+    ghost_text = true,
+}
+
+local performance = {
+    debounce = 150,
 }
 
 local options = {
@@ -170,16 +187,18 @@ local options = {
     sorting = sorting,
     confirmation = confirmation,
     experimental = experimental,
+    performance = performance,
+    preselect = cmp.PreselectMode.Item,
 }
 
--- `/` cmdline setup.
+-- '/'
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = "buffer" },
     },
 })
--- `:` cmdline setup.
+-- `:`
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({

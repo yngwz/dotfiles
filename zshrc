@@ -71,6 +71,10 @@ export GOOGLE_APPLICATION_CREDENTIALS="/Users/tim/Projects/expo-extract/expo-ext
 export PNPM_HOME="/Users/tim/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+
+# Open AI Key
+export OPENAI_API_KEY="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"
+
 # Bun
 export BUN_INSTALL="/Users/tim/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
@@ -81,6 +85,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Deno
 export DENO_INSTALL="/Users/tim/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# Python
+export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages" # Path of python3 packages
+
 
 # tabtab source for packages
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
