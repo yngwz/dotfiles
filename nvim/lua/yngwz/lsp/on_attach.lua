@@ -6,19 +6,6 @@ M.on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true }
     local keymap = vim.api.nvim_buf_set_keymap
 
-    if client.name == "denols" then
-        for _, client_ in pairs(active_clients) do
-            -- prevent tsserver from starting if deno is already active
-            if client_.name == "tsserver" then
-                client_.stop()
-            end
-        end
-    end
-
-    if client.name == "sumneko_lua" then
-        client.server_capabilities.document_formatting = false
-    end
-
     if client.name == "tsserver" then
         client.server_capabilities.document_formatting = false
 
@@ -38,6 +25,19 @@ M.on_attach = function(client, bufnr)
         )
     else
         keymap(bufnr, "n", "gd", "<cmd>Trouble lsp_definitions<CR>", opts)
+    end
+
+    if client.name == "denols" then
+        for _, client_ in pairs(active_clients) do
+            -- prevent tsserver from starting if deno is already active
+            if client_.name == "tsserver" then
+                client_.stop()
+            end
+        end
+    end
+
+    if client.name == "sumneko_lua" then
+        client.server_capabilities.document_formatting = false
     end
 
     keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
