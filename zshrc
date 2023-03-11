@@ -85,7 +85,8 @@ export DENO_INSTALL="/Users/tim/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Python
-export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7" # Path of python3 packages
+# export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7" # Path of python3 packages
+export PYTHONPATH="/Users/tim/.pyenv/shims/python"
 
 # tabtab source for packages
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
@@ -97,3 +98,6 @@ if [ -f '/Users/tim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tim/google-
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/tim/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tim/google-cloud-sdk/completion.zsh.inc'; fi
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
