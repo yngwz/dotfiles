@@ -5,6 +5,7 @@
 - clean: ["~"]
 - link:
     ~/.zshrc: zshrc
+    ~/.env-vars: env-vars
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.config/tmux: tmux
