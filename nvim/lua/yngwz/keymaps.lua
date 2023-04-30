@@ -56,6 +56,31 @@ M.bufferline = {
     },
 }
 
+M.trouble = {
+    -- new buffer
+    ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "Toggle Trouble" },
+    ["<leader>tw"] = {
+        "<cmd> TroubleToggle workspace_diagnostics <CR>",
+        "Trouble Workspace Diagnostics",
+    },
+    ["<leader>td"] = {
+        "<cmd> TroubleToggle document_diagnostics<CR>",
+        "Trouble Document Diagnostics",
+    },
+    ["<leader>tl"] = {
+        "<cmd> TroubleToggle loclist<CR>",
+        "Trouble loclist",
+    },
+    ["<leader>ty"] = {
+        "<cmd> TroubleToggle quickfix<CR>",
+        "Trouble quickfix",
+    },
+    ["<leader>gR"] = {
+        "<cmd> TroubleToggle lsp_references<CR>",
+        "LSP References",
+    },
+}
+
 M.DAP = {
     n = {
         ["<F5>"] = { '<cmd>lua require("dap").continue()<CR>', "Continue" },
