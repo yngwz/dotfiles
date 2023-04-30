@@ -4,7 +4,8 @@ if not present then
     return
 end
 
-local options = { -- BEGIN_DEFAULT_OPTS
+local options = {
+    -- BEGIN_DEFAULT_OPTS
     auto_reload_on_write = true,
     disable_netrw = true,
     hijack_cursor = true,
@@ -120,6 +121,10 @@ local options = { -- BEGIN_DEFAULT_OPTS
         exclude = {
             ".env",
             ".prettierrc",
+            ".prettierrc.cjs",
+            "docs",
+            "dist",
+            "build",
             ".eslintrc.js",
             ".eslintrc.cjs",
             ".eslintrc.yaml",

@@ -18,8 +18,6 @@ vim.opt.completeopt = "menuone,noselect"
 
 local has_copilot, copilot_cmp = pcall(require, "copilot_cmp.comparators")
 
--- Write a function that adds two numbers
-
 -- Utils
 local check_backspace = function()
     local col = vim.fn.col(".") - 1
@@ -33,9 +31,9 @@ local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
         and vim.api
-        .nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]
-        :match("^%s*$")
-        == nil
+                .nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]
+                :match("^%s*$")
+            == nil
 end
 
 -- Setup
@@ -63,11 +61,11 @@ local formatting = {
         },
         before = function(entry, vim_item)
             vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[Snippet]",
-                    buffer = "[Buffer]",
-                    path = "[Path]",
-                })[entry.source.name]
+                nvim_lsp = "[LSP]",
+                luasnip = "[Snippet]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+            })[entry.source.name]
             return vim_item
         end,
     }),
@@ -76,7 +74,7 @@ local formatting = {
 local mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs( -4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
@@ -110,8 +108,8 @@ local mapping = {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
             cmp.select_prev_item()
-        elseif lua_snip.jumpable( -1) then
-            lua_snip.jump( -1)
+        elseif lua_snip.jumpable(-1) then
+            lua_snip.jump(-1)
         else
             fallback()
         end
@@ -122,23 +120,22 @@ local mapping = {
 }
 
 local sources = {
-    { name = "nvim_lsp",                group_index = 2 },
-    { name = "copilot",                 group_index = 2 },
-    { name = "luasnip",                 group_index = 2 },
-    { name = "nvim_lsp_signature_help", group_index = 2 },
-    { name = "treesitter",              group_index = 2 },
-    { name = "npm",                     group_index = 2 },
+    { name = "nvim_lsp" },
+    { name = "copilot" },
+    { name = "luasnip" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "treesitter" },
+    { name = "npm" },
     {
         name = "buffer",
-        group_index = 2,
     },
-    { name = "path", group_index = 2 },
+    { name = "path" },
 }
 
 local sorting = {
     --keep priority weight at 2 for much closer matches to appear above copilot
     --set to 1 to make copilot always appear on top
-    priority_weight = 1,
+    priority_weight = 2,
     comparators = {
         -- order matters here
         cmp.config.compare.exact,

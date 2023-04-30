@@ -8,7 +8,7 @@ import(
         mason_null_ls.setup({
             ensure_installed = {
                 "stylua",
-                "prettier",
+                "prettierd",
                 "rustywind",
                 "black",
                 "isort",
@@ -21,6 +21,9 @@ import(
                 -- all sources with no handler get passed here
                 -- Keep original functionality of `automatic_setup = true`
                 mason_automatic_setup(source_name, methods)
+            end,
+            prettierd = function()
+                null_ls.register(null_ls.builtins.formatting.prettierd)
             end,
             stylua = function()
                 null_ls.register(null_ls.builtins.formatting.stylua)

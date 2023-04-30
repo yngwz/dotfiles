@@ -38,9 +38,7 @@ import(
                 "taplo",
                 "marksman",
                 "dockerls",
-                "cssmodules_ls",
                 "volar",
-                "angularls",
                 "rust_analyzer",
             },
         })
@@ -67,8 +65,6 @@ import(
             ["tsserver"] = function()
                 import("typescript", function(typescript)
                     typescript.setup({
-                        root_dir = lspConfig.util.root_pattern("package.json"),
-                        single_file_support = false,
                         server = opts,
                     })
                 end)

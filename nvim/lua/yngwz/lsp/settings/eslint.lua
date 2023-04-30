@@ -1,7 +1,6 @@
 local status, lspconfig_util = pcall(require, "lspconfig.util")
 
 if not status then
-    print("no eslint info")
     return
 end
 
