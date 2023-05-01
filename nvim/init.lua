@@ -4,5 +4,5 @@ if present then
     impatient.enable_profile()
 end
 
-require("import")
+-- require("import")
 require("yngwz")

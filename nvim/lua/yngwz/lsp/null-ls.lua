@@ -1,9 +1,8 @@
-import(
-    { "mason-null-ls", "null-ls", "mason-null-ls.automatic_setup" },
-    function(modules)
-        local mason_null_ls = modules["mason-null-ls"]
-        local mason_automatic_setup = modules["mason-null-ls.automatic_setup"]
-        local null_ls = modules["null-ls"]
+
+        local mason_null_ls = require("mason-null-ls")
+        local mason_automatic_setup = require("mason-null-ls.automatic_setup")
+        local null_ls = require("null-ls")
+
 
         mason_null_ls.setup({
             ensure_installed = {
@@ -14,15 +13,9 @@ import(
                 "isort",
                 "flake8",
             },
-        })
-
-        mason_null_ls.setup_handlers({
-            function(source_name, methods)
-                -- all sources with no handler get passed here
-                -- Keep original functionality of `automatic_setup = true`
-                mason_automatic_setup(source_name, methods)
-            end,
-            prettierd = function()
+            automatic_setup = true,
+            handlers = {
+                                prettierd = function()
                 null_ls.register(null_ls.builtins.formatting.prettierd)
             end,
             stylua = function()
@@ -33,7 +26,10 @@ import(
                     args = { "--ignore=E501" },
                 }))
             end,
+
+            }
         })
+
 
         -- will setup any installed and configured sources above
         null_ls.setup({
@@ -53,5 +49,3 @@ import(
                 end
             end,
         })
-    end
-)

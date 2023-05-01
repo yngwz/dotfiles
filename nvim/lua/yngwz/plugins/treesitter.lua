@@ -15,7 +15,30 @@ end
 -- local colors = catppuccin_colors.get_palette()
 
 treesitter.setup({
-    ensure_installed = "all", -- one of "all", or a list of languages
+	ensure_installed = {
+			"lua",
+			"markdown",
+			"html",
+			"css",
+			"javascript",
+			"typescript",
+			"tsx",
+			"prisma",
+			"json",
+			"svelte",
+			"scss",
+			"c",
+			"python",
+			"pug",
+			"php",
+			"java",
+			"astro",
+			"vue",
+			"dockerfile",
+			"graphql",
+			"yaml",
+			"toml",
+		},
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     ignore_install = { "haskell" }, -- list of parsers to ignore installing
     matchup = {

@@ -1,6 +1,12 @@
 local utils = require("yngwz.utils")
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.o.termguicolors = true
+vim.g.loaded_netrwPlugin = 1
+
 local core_modules = {
-    "yngwz.packer",
+    "yngwz.lazy-plugins",
     "yngwz.set",
     "yngwz.autocmds",
     "yngwz.cmds",

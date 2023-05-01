@@ -1,4 +1,5 @@
-import("lsp_signature", function(signature)
+local signature = require("lsp_signature")
+
     signature.setup({
         bind = true,
         handler_opts = {
@@ -7,4 +8,3 @@ import("lsp_signature", function(signature)
         toggle_key = "<M-x>",
         floating_window = false,
     })
-end)

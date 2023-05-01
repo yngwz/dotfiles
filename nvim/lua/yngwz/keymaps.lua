@@ -57,27 +57,28 @@ M.bufferline = {
 }
 
 M.trouble = {
-    -- new buffer
-    ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "Toggle Trouble" },
-    ["<leader>tw"] = {
-        "<cmd> TroubleToggle workspace_diagnostics <CR>",
-        "Trouble Workspace Diagnostics",
-    },
-    ["<leader>td"] = {
-        "<cmd> TroubleToggle document_diagnostics<CR>",
-        "Trouble Document Diagnostics",
-    },
-    ["<leader>tl"] = {
-        "<cmd> TroubleToggle loclist<CR>",
-        "Trouble loclist",
-    },
-    ["<leader>ty"] = {
-        "<cmd> TroubleToggle quickfix<CR>",
-        "Trouble quickfix",
-    },
-    ["<leader>gR"] = {
-        "<cmd> TroubleToggle lsp_references<CR>",
-        "LSP References",
+    n = {
+        ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "Toggle Trouble" },
+        ["<leader>tw"] = {
+            "<cmd> TroubleToggle workspace_diagnostics <CR>",
+            "Trouble Workspace Diagnostics",
+        },
+        ["<leader>td"] = {
+            "<cmd> TroubleToggle document_diagnostics<CR>",
+            "Trouble Document Diagnostics",
+        },
+        ["<leader>tl"] = {
+            "<cmd> TroubleToggle loclist<CR>",
+            "Trouble loclist",
+        },
+        ["<leader>ty"] = {
+            "<cmd> TroubleToggle quickfix<CR>",
+            "Trouble quickfix",
+        },
+        ["<leader>gR"] = {
+            "<cmd> TroubleToggle lsp_references<CR>",
+            "LSP References",
+        },
     },
 }
 
@@ -132,7 +133,6 @@ M.comment = {
 
 M.lspconfig = {
     -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
-
     n = {
         ["gD"] = {
             function()
@@ -194,7 +194,6 @@ M.lspconfig = {
             end,
             "   lsp references",
         },
-
         ["<leader>ge"] = {
             function()
                 vim.diagnostic.open_float()
@@ -223,7 +222,7 @@ M.lspconfig = {
             "   diagnostic setloclist",
         },
 
-        ["<leader>fm"] = {
+        ["<leader>gm"] = {
             function()
                 vim.lsp.buf.formatting()
             end,
@@ -270,6 +269,51 @@ M.packer = {
         ["<leader>pr"] = {
             "<cmd> PackerStatus <CR>",
             "Status report of packages",
+        },
+    },
+}
+
+M.harpoon = {
+    n = {
+        ["<leader>fm"] = {
+            "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
+            "Marked files",
+        },
+        ["<leader>mm"] = {
+            "<cmd>lua require('harpoon.mark').add_file()<cr>",
+            "Mark file",
+        },
+        ["<leader>m1"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
+            "Mark file",
+        },
+        ["<leader>m2"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
+            "Mark file",
+        },
+        ["<leader>m3"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
+            "Mark file",
+        },
+        ["<leader>m4"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
+            "Mark file",
+        },
+        ["<leader>m5"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
+            "Mark file",
+        },
+        ["<leader>m6"] = {
+            "<cmd>lua require('harpoon.ui').nav_file(6)<cr>",
+            "Mark file",
+        },
+        ["<leader>ml"] = {
+            "<cmd>lua require('harpoon.ui').nav_next()<cr>",
+            "Mark file",
+        },
+        ["<leader>mh"] = {
+            "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
+            "Mark file",
         },
     },
 }

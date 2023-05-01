@@ -8,6 +8,8 @@ vim.o.runtimepath = vim.fn.stdpath("data")
     .. vim.o.runtimepath
 g.toggle_theme_icon = "   "
 
+vim.o.termguicolors = true
+
 opt.confirm = true
 opt.laststatus = 3 -- global statusline
 opt.title = true

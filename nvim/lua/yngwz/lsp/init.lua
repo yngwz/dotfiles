@@ -6,13 +6,11 @@ require("yngwz.lsp.lightbulb")
 require("yngwz.lsp.trouble")
 require("yngwz.lsp.barbecue")
 
-import(
-    { "mason", "mason-lspconfig", "lspconfig", "cmp_nvim_lsp" },
-    function(modules)
-        local mason = modules.mason
-        local masonLspConfig = modules["mason-lspconfig"]
-        local cmpLsp = modules["cmp_nvim_lsp"]
-        local lspConfig = modules["lspConfig"]
+local mason = require("mason") 
+local masonLspConfig = require("mason-lspconfig") 
+local cmpLsp = require("cmp_nvim_lsp")
+local lspconfig = require("lspconfig")
+
 
         mason.setup({
             ui = {
@@ -48,6 +46,9 @@ import(
             on_attach = require("yngwz.lsp.on_attach").on_attach,
         }
 
+
+        local typescript = require("typescript")
+
         masonLspConfig.setup_handlers({
             function(server_name)
                 local has_custom_opts, custom_opts =
@@ -60,22 +61,13 @@ import(
                         vim.tbl_deep_extend("force", custom_opts, opts)
                 end
 
-                modules.lspconfig[server_name].setup(server_opts)
+                lspconfig[server_name].setup(server_opts)
             end,
             ["tsserver"] = function()
-                import("typescript", function(typescript)
                     typescript.setup({
                         server = opts,
                     })
-                end)
-            end,
-            ["rust_analyzer"] = function()
-                import("rust-tools", function(rustTools)
-                    rustTools.setup({ server = opts })
-                end)
             end,
         })
 
         require("yngwz.lsp.null-ls")
-    end
-)

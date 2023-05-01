@@ -1,3 +1,3 @@
-import("trouble", function(trouble)
-    trouble.setup()
-end)
+local trouble = require("trouble")
+
+trouble.setup()

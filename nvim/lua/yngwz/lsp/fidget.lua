@@ -1,3 +1,3 @@
-import("fidget", function(fidget)
-    fidget.setup()
-end)
+local fidget = require("fidget")    
+
+fidget.setup()

@@ -1,22 +1,31 @@
-local fn = vim.fn
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
 local plugins = {
     { "nvim-lua/plenary.nvim" },
     { "miversen33/import.nvim" },
     { "lewis6991/impatient.nvim" },
-    { "wbthomason/packer.nvim", event = "VimEnter" },
     -- Theme
     {
         "catppuccin/nvim",
-        as = "catppuccin",
-        after = "packer.nvim",
-        run = ":CatppuccinCompile",
+        name = "catppuccin",
+        build = ":CatppuccinCompile",
         config = function()
             require("yngwz.plugins.catppuccin")
         end,
     },
     {
         "kyazdani42/nvim-web-devicons",
-        after = "catppuccin",
         config = function()
             require("yngwz.plugins.icons")
         end,
@@ -24,7 +33,6 @@ local plugins = {
 
     {
         "feline-nvim/feline.nvim",
-        after = "nvim-web-devicons",
         config = function()
             require("yngwz.plugins.feline")
         end,
@@ -32,7 +40,6 @@ local plugins = {
 
     {
         "akinsho/bufferline.nvim",
-        after = "nvim-web-devicons",
         config = function()
             require("yngwz.plugins.bufferline")
         end,
@@ -56,50 +63,41 @@ local plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufRead", "BufNewFile" },
-        run = ":TSUpdate",
+        build = ":TSUpdate",
         config = function()
             require("yngwz.plugins.treesitter")
         end,
-    },
-    {
-        "nvim-treesitter/playground",
-        after = { "nvim-treesitter" },
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        after = { "nvim-treesitter" },
-    },
-    { "RRethy/nvim-treesitter-textsubjects", after = { "nvim-treesitter" } },
-    {
-        "p00f/nvim-ts-rainbow",
-        after = { "nvim-treesitter" },
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        after = { "nvim-treesitter" },
+        dependencies = {
+            "nvim-treesitter/playground",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "p00f/nvim-ts-rainbow",
+            "nvim-treesitter/nvim-treesitter-context",
+            "RRethy/nvim-treesitter-textsubjects",
+            "JoosepAlviste/nvim-ts-context-commentstring",
+            {
+                "windwp/nvim-ts-autotag",
+                config = function()
+                    require("yngwz.plugins.autoclose").autotag()
+                end,
+            },
+        },
     },
     {
         "RRethy/vim-illuminate",
-        after = { "nvim-treesitter" },
         config = function()
             require("yngwz.plugins.vim-illuminate")
         end,
     },
     {
         "m-demare/hlargs.nvim",
-        after = { "nvim-treesitter" },
         config = function()
             require("yngwz.plugins.hlargs")
         end,
     },
     {
         "lewis6991/gitsigns.nvim",
-        opt = true,
         config = function()
             require("yngwz.plugins.others").gitsigns()
-        end,
-        setup = function()
-            utils.packer_lazy_load("gitsigns.nvim")
         end,
     },
 
@@ -124,80 +122,45 @@ local plugins = {
     { "folke/trouble.nvim" },
     { "smiteshp/nvim-navic" },
     { "utilyre/barbecue.nvim" },
-    { "simrat39/rust-tools.nvim" },
 
     -- CMP
-    --
     {
         "hrsh7th/nvim-cmp",
         config = function()
             require("yngwz.plugins.cmp")
         end,
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-nvim-lsp",
+            "ray-x/cmp-treesitter",
+            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            "hrsh7th/cmp-cmdline",
+            "David-Kunz/cmp-npm",
+            "zbirenbaum/copilot-cmp",
+        },
     },
     {
-        "hrsh7th/cmp-buffer",
-    },
-    {
-        "hrsh7th/cmp-path",
-    },
-    { "hrsh7th/cmp-cmdline", after = "cmp-path" },
-    {
-        "saadparwaiz1/cmp_luasnip",
-    },
-    {
-        "L3MON4D3/LuaSnip",
-    },
-    {
-        "rafamadriz/friendly-snippets",
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp",
-    },
-    {
-        "hrsh7th/cmp-nvim-lua",
-    },
-    {
-        "ray-x/cmp-treesitter",
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-    },
-    {
-        "David-Kunz/cmp-npm",
-        after = "cmp-path",
-        requires = "nvim-lua/plenary.nvim",
+        "windwp/nvim-autopairs",
         config = function()
-            require("yngwz.plugins.cmp-npm")
+            require("yngwz.plugins.autoclose").autopairs()
         end,
     },
     { "onsails/lspkind.nvim" },
     {
         "zbirenbaum/copilot.lua",
     },
-    { "zbirenbaum/copilot-cmp" },
 
     -- DAP
     {
         "mfussenegger/nvim-dap",
-        requires = {
-            "jayp0521/mason-nvim-dap.nvim",
-        },
-        config = function()
-            require("yngwz.plugins.dap")
-        end,
     },
-    -- {
-    --     "microsoft/vscode-js-debug",
-    --     opt = true,
-    --     run = "npm install --legacy-peer-deps && npm run compile",
-    -- },
-    -- { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
     {
         "rcarriga/nvim-dap-ui",
-        requires = { "mfussenegger/nvim-dap" },
-        config = function()
-            require("dapui").setup()
-        end,
     },
     {
         "theHamsta/nvim-dap-virtual-text",
@@ -212,30 +175,12 @@ local plugins = {
         end,
     },
     {
-        "windwp/nvim-autopairs",
-        after = "nvim-cmp",
-        config = function()
-            require("yngwz.plugins.autoclose").autopairs()
-        end,
-    },
-    {
-        "windwp/nvim-ts-autotag",
-        after = "nvim-treesitter",
-        config = function()
-            require("yngwz.plugins.autoclose").autotag()
-        end,
-    },
-    {
         "numToStr/Comment.nvim",
         module = "Comment",
         keys = { "gc", "gb" },
         config = function()
             require("yngwz.plugins.comment")
         end,
-    },
-    {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        after = "nvim-treesitter",
     },
     {
         "kyazdani42/nvim-tree.lua",
@@ -247,33 +192,26 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
+
         config = function()
             require("yngwz.plugins.telescope")
         end,
     },
     {
         "rcarriga/nvim-notify",
-        after = "telescope.nvim",
+        dependencies = { "telescope.nvim" },
         config = function()
             require("yngwz.plugins.notify")
         end,
     },
     {
         "folke/which-key.nvim",
-        opt = true,
-        setup = function()
-            utils.packer_lazy_load("which-key.nvim")
-        end,
         config = function()
             require("yngwz.plugins.whichkey")
         end,
     },
     {
         "tpope/vim-surround",
-        opt = true,
-        setup = function()
-            utils.packer_lazy_load("vim-surround")
-        end,
     },
     {
         "nmac427/guess-indent.nvim",
@@ -304,11 +242,10 @@ local plugins = {
     },
     {
         "ThePrimeagen/harpoon",
+        config = function()
+            require("yngwz.plugins.harpoon")
+        end,
     },
 }
 
-return packer.startup(function(use)
-    for _, v in pairs(plugins) do
-        use(v)
-    end
-end)
+require("lazy").setup(plugins)

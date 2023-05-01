@@ -1,3 +1,3 @@
-import("barbecue", function(barbecue)
+local barbecue = require("barbecue")
+
     barbecue.setup()
-end)

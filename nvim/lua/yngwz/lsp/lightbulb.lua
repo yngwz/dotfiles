@@ -1,3 +1,3 @@
-import("nvim-lightbulb", function(lightbulb)
+local lightbulb = require("nvim-lightbulb")
+
     lightbulb.setup({ autocmd = { enabled = true } })
-end)
