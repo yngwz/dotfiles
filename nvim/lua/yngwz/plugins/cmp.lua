@@ -126,9 +126,7 @@ local sources = {
     { name = "nvim_lsp_signature_help" },
     { name = "treesitter" },
     { name = "npm" },
-    {
-        name = "buffer",
-    },
+    { name = "buffer" },
     { name = "path" },
 }
 
@@ -150,25 +148,17 @@ local sorting = {
         cmp.config.compare.sort_text,
         cmp.config.compare.length,
         cmp.config.compare.order,
-        -- personal settings:
-        -- cmp.config.compare.recently_used,
-        -- cmp.config.compare.offset,
-        -- cmp.config.compare.score,
-        -- cmp.config.compare.sort_text,
-        -- cmp.config.compare.length,
-        -- cmp.config.compare.order,
     },
 }
 
-local confirmation = {
-    get_commit_characters = function()
-        return {}
-    end,
+local confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
 }
 
 local experimental = {
     native_menu = false,
-    ghost_text = true,
+    ghost_text = false,
 }
 
 local performance = {
@@ -182,7 +172,7 @@ local options = {
     mapping = mapping,
     sources = sources,
     sorting = sorting,
-    confirmation = confirmation,
+    confirm_opts = confirm_opts,
     experimental = experimental,
     performance = performance,
     preselect = cmp.PreselectMode.Item,
