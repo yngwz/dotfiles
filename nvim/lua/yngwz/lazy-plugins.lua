@@ -250,6 +250,13 @@ local plugins = {
             require("yngwz.plugins.harpoon")
         end,
     },
+
+    -- Local plugins
+    {
+        name = "Componentizer",
+        dir = "~/Projects/neovim-plugins/Componentizer",
+        dev = true,
+    },
 }
 
 require("lazy").setup(plugins)
