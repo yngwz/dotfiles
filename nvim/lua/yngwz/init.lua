@@ -7,6 +7,7 @@ vim.g.loaded_netrwPlugin = 1
 
 local core_modules = {
     "yngwz.lazy-plugins",
+    "yngwz.globals",
     "yngwz.set",
     "yngwz.autocmds",
     "yngwz.cmds",
