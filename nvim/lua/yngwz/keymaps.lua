@@ -371,6 +371,4 @@ M.telescope = {
     },
 }
 
-utils.map("n", "<leader>vr", "<cmd>lua reload() <CR>")
-
 return M

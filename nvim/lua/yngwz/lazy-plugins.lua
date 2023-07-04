@@ -70,7 +70,7 @@ local plugins = {
         dependencies = {
             "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "p00f/nvim-ts-rainbow",
+            "hiphish/rainbow-delimiters.nvim",
             "nvim-treesitter/nvim-treesitter-context",
             "RRethy/nvim-treesitter-textsubjects",
             "JoosepAlviste/nvim-ts-context-commentstring",
@@ -107,6 +107,11 @@ local plugins = {
     { "neovim/nvim-lspconfig" },
     { "b0o/SchemaStore.nvim" },
     { "jose-elias-alvarez/typescript.nvim" },
+    {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+    },
     { "simrat39/symbols-outline.nvim" },
     { "j-hui/fidget.nvim" },
     { "ray-x/lsp_signature.nvim" },
