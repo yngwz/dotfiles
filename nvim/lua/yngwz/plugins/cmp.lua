@@ -158,11 +158,11 @@ local confirm_opts = {
 
 local experimental = {
     native_menu = false,
-    ghost_text = false,
+    ghost_text = true,
 }
 
 local performance = {
-    debounce = 150,
+    debounce = 100,
 }
 
 local options = {

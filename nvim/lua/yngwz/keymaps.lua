@@ -31,6 +31,43 @@ M.general = {
     },
 }
 
+M.typescript_tools = {
+    n = {
+        ["<leader>to"] = {
+            "<cmd> TSToolsOrganizeImports <CR>",
+            "Organize imports",
+        },
+        ["<leader>ts"] = {
+            "<cmd> TSToolsSortImports <CR>",
+            "Sort imports",
+        },
+        ["<leader>tri"] = {
+            "<cmd> TSToolsRemoveUnusedImports <CR>",
+            "Remove unused imports",
+        },
+
+        ["<leader>trs"] = {
+            "<cmd> TSToolsRemoveUnused <CR>",
+            "Remove all unused statements",
+        },
+
+        ["<leader>tfi"] = {
+            "<cmd> TSToolsAddMissingImports  <CR>",
+            " Adds imports for all statements that lack one",
+        },
+
+        ["<leader>tfa"] = {
+            "<cmd> TSToolsFixAll <CR>",
+            "Fixes all fixable errors",
+        },
+
+        ["<leader>tgd"] = {
+            "<cmd> TSToolsGoToSourceDefinition  <CR>",
+            "Goes to source definition",
+        },
+    },
+}
+
 M.bufferline = {
     n = {
         -- new buffer
@@ -177,9 +214,7 @@ M.lspconfig = {
         },
 
         ["<leader>rn"] = {
-            function()
-                return ":IncRename " .. vim.fn.expand("<cword>")
-            end,
+            ":IncRename",
             "  rename",
         },
 
@@ -285,35 +320,35 @@ M.harpoon = {
         },
         ["<leader>m1"] = {
             "<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
-            "Mark file",
+            "Go the 1st marked file",
         },
         ["<leader>m2"] = {
             "<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
-            "Mark file",
+            "Go to the the 2nd marked file",
         },
         ["<leader>m3"] = {
             "<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
-            "Mark file",
+            "Go the 3rd marked file",
         },
         ["<leader>m4"] = {
             "<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
-            "Mark file",
+            "Go to the 4th marked file",
         },
         ["<leader>m5"] = {
             "<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
-            "Mark file",
+            "Go to the 5th marked file ",
         },
         ["<leader>m6"] = {
             "<cmd>lua require('harpoon.ui').nav_file(6)<cr>",
-            "Mark file",
+            "Go to the sixth marked file",
         },
         ["<leader>ml"] = {
             "<cmd>lua require('harpoon.ui').nav_next()<cr>",
-            "Mark file",
+            "Next marked file",
         },
         ["<leader>mh"] = {
             "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
-            "Mark file",
+            "Previous marked file",
         },
     },
 }
